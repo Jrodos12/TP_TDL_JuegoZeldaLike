@@ -6,7 +6,7 @@
         En el mismo archivo esta function Room:generateObjects() que podemos usarlo para crear obstaculos tipo piedras
         u objetos decorativos random para que sea mas dinamico el mapa
  - Tipos de arma habria que utilizar el codigo de la espada, casi todo se encuentra en player swing sword state 
-   Modificar sword hit box para hacer algun proytectil, en vez de cambiar el x y de la espada mantiene constante su 
+   Modificar sword hit box para hacer algun arma a distancia, en vez de cambiar el x y de la espada un proyetil mantiene constante su 
    trayectoria en base a donde mira el jugador
    
  - Cambiar arma: 2 opciones teclado o generar un menu, en el video de pokemon in lua del mismo canal explica
