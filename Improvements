@@ -1,0 +1,26 @@
+
+-Cambiar el one hit kill a distinto hp por enemigo: 
+   definir Hp en entity_defs.lua
+   entity.lua (carpeta src) esta la funcion de entity take damag que modifica self.health
+   en room.lua esta la funcion function Room:generateEntities() que ""inicializa""" health a 1 para todo enemigo
+        En el mismo archivo esta function Room:generateObjects() que podemos usarlo para crear obstaculos tipo piedras
+        u objetos decorativos random para que sea mas dinamico el mapa
+ - Tipos de arma habria que utilizar el codigo de la espada, casi todo se encuentra en player swing sword state 
+   Modificar sword hit box para hacer algun proytectil, en vez de cambiar el x y de la espada mantiene constante su 
+   trayectoria en base a donde mira el jugador
+   
+ - Cambiar arma: 2 opciones teclado o generar un menu, en el video de pokemon in lua del mismo canal explica
+    como hacer menus basicos.
+ 
+ - Doungeon no generado de forma random
+ 
+ - "inicio" del juego en un lugar externo antes de ir al primer cuarto: habria que modificar el codigo de startstate 
+    dado que el codigo original utiliza un randomizer para los cuartos, cambiarlo a una planilla fija y que renderice.
+    Lo podemos tratar como un array de cuartos como explica el video al prinicipio (probablemente tablas, debatir)
+    
+  - jefe final en ultimo cuarto? + puerta personalizada para cuarto anterior
+  
+  - Lafuncion donde inserta switch en el cuarto tiene la opcion de ser objetos que no se atraviezan, puede ser modificado
+  para poner ahi el chest con la llave necesaria para el jefe final
+  
+  - Hasta no derrotar enemigos no abren puertas pq sino la mecanica de switch actual te pasas todo el juego de una sin pelear.
