@@ -7,7 +7,7 @@
         u objetos decorativos random para que sea mas dinamico el mapa
  - Tipos de arma habria que utilizar el codigo de la espada, casi todo se encuentra en player swing sword state 
    Modificar sword hit box para hacer algun arma a distancia, en vez de cambiar el x y de la espada un proyetil mantiene constante su 
-   trayectoria en base a donde mira el jugador
+   trayectoria en base a donde mira el jugador (actualizar junto aposicion su hitbox, hacerlo desaparecer si se va del limite del mapa)
    
  - Cambiar arma: 2 opciones teclado o generar un menu, en el video de pokemon in lua del mismo canal explica
     como hacer menus basicos.
