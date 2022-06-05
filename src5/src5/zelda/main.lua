@@ -34,6 +34,7 @@ function love.load()
     love.keyboard.keysPressed = {} --settea un diccionario vacio con las keys apretadas
     --Explicacion de esta linea:
     --https://stackoverflow.com/questions/59969356/why-do-we-make-a-separate-function-for-detecting-input-for-other-classes
+
 end
 
 function love.resize(w, h)
