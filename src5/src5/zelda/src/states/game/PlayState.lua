@@ -20,7 +20,7 @@ function PlayState:init()
         height = 22,
 
         -- one heart == 2 health
-        health = 6,
+        health = 8, -- Esto cambia el valor pero hay q modificar la graficacion de corazones. Lo modifique para testing, CAMBIAR!!!
 
         -- rendering and collision offset for spaced sprites
         offsetY = 5
@@ -58,8 +58,18 @@ function PlayState:render()
     -- draw player hearts, top of screen
     local healthLeft = self.player.health
     local heartFrame = 1
-
-    for i = 1, 3 do
+  
+    -- ********** MODIFICACION: ahora los corazones se dibujan en base a cuanta vida tiene
+    -- asi si le agremos hearts conteiners (posibilidad de recuperar vida) se modifica en base a eso
+   
+   local heartsDraw = self.player.health -- Como redondea division para abajo y existe tener medio corazon, si es impar tiene q igual dibujar un corazon mas
+    if heartsDraw % 2 == 0 then
+      heartsDraw = heartsDraw / 2
+    else
+      heartsDraw = heartsDraw/2 + 1
+    end
+    
+    for i = 1, heartsDraw   do --ACA DIBUJA LOS CORAZONES. No hace falta tocar el resto pq ya utiliza health left para graficar
         if healthLeft > 1 then
             heartFrame = 5
         elseif healthLeft == 1 then

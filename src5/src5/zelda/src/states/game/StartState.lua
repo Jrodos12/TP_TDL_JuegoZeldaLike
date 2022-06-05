@@ -37,12 +37,10 @@ function StartState:render()
     -- love.graphics.setFont(gFonts['gothic-large'])
     -- love.graphics.printf('50', 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
 
-    love.graphics.setFont(gFonts['zelda'])
+    love.graphics.setFont(gFonts['Triforce'])
     love.graphics.setColor(34, 34, 34, 255)
-    love.graphics.printf('Legend of 50', 2, VIRTUAL_HEIGHT / 2 - 30, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('*Titulo del Juego', 2, VIRTUAL_HEIGHT / 2 - 30, VIRTUAL_WIDTH, 'center')
 
-    love.graphics.setColor(175, 53, 42, 255)
-    love.graphics.printf('Legend of 50', 0, VIRTUAL_HEIGHT / 2 - 32, VIRTUAL_WIDTH, 'center')
 
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.setFont(gFonts['zelda-small'])
