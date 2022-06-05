@@ -1,6 +1,7 @@
 --
 -- libraries
 --
+-- ACA AGREGAR FONTS, SONIDOS ETC
 
 Class = require 'lib/class'
 Event = require 'lib/knife.event'
@@ -61,6 +62,7 @@ gFonts = {
     ['gothic-medium'] = love.graphics.newFont('fonts/GothicPixels.ttf', 16),
     ['gothic-large'] = love.graphics.newFont('fonts/GothicPixels.ttf', 32),
     ['zelda'] = love.graphics.newFont('fonts/zelda.otf', 64),
+    ['Triforce'] = love.graphics.newFont('fonts/Triforce.ttf', 50),
     ['zelda-small'] = love.graphics.newFont('fonts/zelda.otf', 32)
 }
 

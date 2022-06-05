@@ -28,10 +28,13 @@ function love.load()
     }
     gStateMachine:change('start')
 
-    gSounds['music']:setLooping(true)
+    gSounds['music']:setLooping(true) --pone la musica en loop
     gSounds['music']:play()
 
-    love.keyboard.keysPressed = {} 
+    love.keyboard.keysPressed = {} --settea un diccionario vacio con las keys apretadas
+    --Explicacion de esta linea:
+    --https://stackoverflow.com/questions/59969356/why-do-we-make-a-separate-function-for-detecting-input-for-other-classes
+
 end
 
 function love.resize(w, h)
@@ -39,18 +42,18 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
-    love.keyboard.keysPressed[key] = true
+    love.keyboard.keysPressed[key] = true -- pone que dic[key] = true si lo apretas
 end
 
 function love.keyboard.wasPressed(key)
-    return love.keyboard.keysPressed[key]
+    return love.keyboard.keysPressed[key] -- para saber si apreto tecla chequea dic
 end
 
 function love.update(dt)
     Timer.update(dt)
     gStateMachine:update(dt)
 
-    love.keyboard.keysPressed = {}
+    love.keyboard.keysPressed = {} --vacia el dic
 end
 
 function love.draw()
