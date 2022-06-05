@@ -32,8 +32,6 @@ function love.load()
     gSounds['music']:play()
 
     love.keyboard.keysPressed = {} 
-    --Explicacion de esta linea:
-    --https://stackoverflow.com/questions/59969356/why-do-we-make-a-separate-function-for-detecting-input-for-other-classes
 end
 
 function love.resize(w, h)
