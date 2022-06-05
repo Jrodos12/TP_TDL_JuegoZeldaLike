@@ -7,6 +7,7 @@ Actual:
 
 
 Modificaciones:
+
   -Cambie la forma de graficar corazones para que utilice el parametro health en vez de utilizar una cte (3 corazones)
   Asi si damos la posibilidad de aumentar la cantidad de corazones o la vida, grafica en base a eso.
   - Puse un place holder de titulo
