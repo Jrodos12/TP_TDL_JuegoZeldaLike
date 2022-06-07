@@ -41,7 +41,7 @@ function PlayerSwingSwordState:init(player, dungeon)
         hitboxHeight = 8
         hitboxX = self.player.x
         hitboxY = self.player.y + self.player.height
-    end
+    end 
 
     self.swordHitbox = Hitbox(hitboxX, hitboxY, hitboxWidth, hitboxHeight)
     self.player:changeAnimation('sword-' .. self.player.direction)
