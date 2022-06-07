@@ -60,6 +60,7 @@ function PlayerSwingSwordState:update(dt)
     for k, entity in pairs(self.dungeon.currentRoom.entities) do
         if entity:collides(self.swordHitbox) then
             entity:damage(1)
+            entity:goInvulnerable(1.5)
             gSounds['hit-enemy']:play()
         end
     end
@@ -82,7 +83,6 @@ function PlayerSwingSwordState:render()
     -- debug for player and hurtbox collision rects
     -- love.graphics.setColor(255, 0, 255, 255)
     -- love.graphics.rectangle('line', self.player.x, self.player.y, self.player.width, self.player.height)
-    -- love.graphics.rectangle('line', self.swordHurtbox.x, self.swordHurtbox.y,
-    --     self.swordHurtbox.width, self.swordHurtbox.height)
-    -- love.graphics.setColor(255, 255, 255, 255)
+    -- love.graphics.rectangle('line', self.swordHitbox.x, self.swordHitbox.y, self.swordHitbox.height, self.swordHitbox.width)
+    --love.graphics.setColor(255, 255, 255, 255)
 end
