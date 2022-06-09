@@ -61,7 +61,9 @@ function Entity:collides(target)
 end
 
 function Entity:damage(dmg)
-    self.health = self.health - dmg
+    if not self.invulnerable then
+      self.health = self.health - dmg
+    end
 end
 
 function Entity:goInvulnerable(duration)
