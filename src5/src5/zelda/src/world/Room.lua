@@ -67,7 +67,7 @@ function Room:generateEntities()
             width = 16,
             height = 16,
 
-            health = 1
+            health = ENTITY_DEFS[type].health
         })
 
         self.entities[i].stateMachine = StateMachine {
