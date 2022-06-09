@@ -11,7 +11,10 @@ Room = Class{}
 function Room:init(player)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
-
+    
+    self.waitTimer = 0
+    self.wait = false
+    
     self.tiles = {}
     self:generateWallsAndFloors()
 
@@ -94,14 +97,22 @@ function Room:generateObjects()
     -- define a function for the switch that will open all doors in the room
     switch.onCollide = function()
         if switch.state == 'unpressed' then
-            switch.state = 'pressed'
-            
-            -- open every door in the room if we press the switch
-            for k, doorway in pairs(self.doorways) do
-                doorway.open = true
+            local allDead = true
+            for k, entity in pairs(self.entities) do
+              if not entity.dead then allDead = false end
             end
-
-            gSounds['door']:play()
+            
+            if allDead then
+              switch.state = 'pressed'
+              -- open every door in the room if we press the switch
+              for k, doorway in pairs(self.doorways) do
+                  doorway.open = true
+              end
+              gSounds['door']:play()
+            else
+              self.waitTimer = love.timer.getTime(0)
+              self.wait = true
+            end
         end
     end
 end
@@ -147,6 +158,7 @@ function Room:generateWallsAndFloors()
 end
 
 function Room:update(dt)
+  
     -- don't update anything if we are sliding to another room (we have offsets)
     if self.adjacentOffsetX ~= 0 or self.adjacentOffsetY ~= 0 then return end
 
@@ -183,9 +195,11 @@ function Room:update(dt)
             object:onCollide()
         end
     end
+    
 end
 
 function Room:render()
+    
     for y = 1, self.height do
         for x = 1, self.width do
             local tile = self.tiles[y][x]
@@ -233,6 +247,21 @@ function Room:render()
     if self.player then
         self.player:render()
     end
-
+    
+    if self.wait then
+      local timePassed = love.timer.getTime(0) - self.waitTimer
+      if  timePassed < 3 then 
+        love.graphics.setColor(85/255, 148/255, 161/255, 0.2)
+        love.graphics.rectangle('fill', VIRTUAL_WIDTH/2 -100, 20,400,18)
+        love.graphics.setColor(43/255, 56/255, 69/255, 0.8)
+        love.graphics.rectangle('fill', VIRTUAL_WIDTH/2 -200, 20,400,15)
+        love.graphics.setFont(gFonts['large'])
+        love.graphics.setColor(1,1,1, 1)
+        love.graphics.printf('Kill all the enemies to continue', 0, 20, VIRTUAL_WIDTH - 20, 'center')
+      else 
+        self.wait = false
+      end
+    end
+    
     love.graphics.setStencilTest()
 end
