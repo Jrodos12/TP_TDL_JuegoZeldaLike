@@ -257,7 +257,7 @@ function Room:render()
     
     if self.wait then
       local timePassed = love.timer.getTime(0) - self.waitTimer
-      if  timePassed < 3 then 
+      if  timePassed < 1.7 then 
         love.graphics.setColor(85/255, 148/255, 161/255, 0.2)
         love.graphics.rectangle('fill', VIRTUAL_WIDTH/2 -100, 20,400,18)
         love.graphics.setColor(43/255, 56/255, 69/255, 0.8)
