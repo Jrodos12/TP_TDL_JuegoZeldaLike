@@ -14,6 +14,7 @@ function Room:init(player)
     
     self.waitTimer = 0
     self.wait = false
+    self.waitTime = 0
     
     self.tiles = {}
     self:generateWallsAndFloors()
@@ -115,6 +116,7 @@ function Room:generateObjects()
             else
               self.waitTimer = love.timer.getTime(0)
               self.wait = true
+              self.waitTime = 1.7
             end
         end
     end
@@ -257,7 +259,7 @@ function Room:render()
     
     if self.wait then
       local timePassed = love.timer.getTime(0) - self.waitTimer
-      if  timePassed < 1.7 then 
+      if  timePassed < self.waitTime then 
         love.graphics.setColor(85/255, 148/255, 161/255, 0.2)
         love.graphics.rectangle('fill', VIRTUAL_WIDTH/2 -100, 20,400,18)
         love.graphics.setColor(43/255, 56/255, 69/255, 0.8)
@@ -267,7 +269,8 @@ function Room:render()
         love.graphics.printf('Kill all the enemies to continue', 0, 20, VIRTUAL_WIDTH - 20, 'center')
       else 
         self.wait = false
-        self.player:cantPressSwitch(1.5)
+        self.player:cantPressSwitch(1.7)
+        self.waitTime = 0
        
       end
     end
