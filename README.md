@@ -8,9 +8,8 @@ Actual:
 
 Modificaciones:
 
-  -Cambie la forma de graficar corazones para que utilice el parametro health en vez de utilizar una cte (3 corazones)
-  Asi si damos la posibilidad de aumentar la cantidad de corazones o la vida, grafica en base a eso.
-  - Puse un place holder de titulo
-  - Cambie los codigos de colores q vi (en la version actual para el color usa de 0 a 1 y no de 0 a 255 como estaba
+  -Cambiamos forma de graficar corazones para que utilice el parametro health en vez de utilizar una cte (3 corazones). Asi si damos la posibilidad de aumentar la cantidad de corazones o la vida, grafica en base a eso.
+  - Place holder de titulo para ir personalizando de a poco
+  - Cambio de los codigos de colores (en la version actual para el color usa de 0 a 1 y no de 0 a 255 como estaba
   - Las puertas se abren solo cndo derrotas a todos los enemigos
   - Los switch dan mensaje de que hay que hacer si no los podes abrir
