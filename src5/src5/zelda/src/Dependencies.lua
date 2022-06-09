@@ -58,12 +58,13 @@ gFrames = {
 gFonts = {
     ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
     ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
-    ['large'] = love.graphics.newFont('fonts/font.ttf', 32),
+    ['large'] = love.graphics.newFont('fonts/Gameplay.ttf', 12),
     ['gothic-medium'] = love.graphics.newFont('fonts/GothicPixels.ttf', 16),
     ['gothic-large'] = love.graphics.newFont('fonts/GothicPixels.ttf', 32),
     ['zelda'] = love.graphics.newFont('fonts/zelda.otf', 64),
     ['Triforce'] = love.graphics.newFont('fonts/Triforce.ttf', 50),
-    ['zelda-small'] = love.graphics.newFont('fonts/zelda.otf', 32)
+    ['zelda-small'] = love.graphics.newFont('fonts/zelda.otf', 32),
+    ['zelda-small2'] = love.graphics.newFont('fonts/zelda.otf', 18)
 }
 
 gSounds = {
