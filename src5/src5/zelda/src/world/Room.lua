@@ -83,6 +83,7 @@ end
     Randomly creates an assortment of obstacles for the player to navigate around.
 ]]
 function Room:generateObjects()
+    
     table.insert(self.objects, GameObject(
         GAME_OBJECT_DEFS['switch'],
         math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
@@ -90,13 +91,15 @@ function Room:generateObjects()
         math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     ))
+  
 
     -- get a reference to the switch
     local switch = self.objects[1]
 
     -- define a function for the switch that will open all doors in the room
     switch.onCollide = function()
-        if switch.state == 'unpressed' then
+        
+        if switch.state == 'unpressed' and not self.player.switchinvulnerable then
             local allDead = true
             for k, entity in pairs(self.entities) do
               if not entity.dead then allDead = false end
@@ -162,41 +165,45 @@ function Room:update(dt)
     -- don't update anything if we are sliding to another room (we have offsets)
     if self.adjacentOffsetX ~= 0 or self.adjacentOffsetY ~= 0 then return end
 
-    self.player:update(dt)
 
-    for i = #self.entities, 1, -1 do
-        local entity = self.entities[i]
+    if not self.wait then
+      self.player:update(dt)
+      for i = #self.entities, 1, -1 do
+          local entity = self.entities[i]
 
-        -- remove entity from the table if health is <= 0
-        if entity.health <= 0 then
-            entity.dead = true
-        elseif not entity.dead then
-            entity:processAI({room = self}, dt)
-            entity:update(dt)
-        end
+          -- remove entity from the table if health is <= 0
+          if entity.health <= 0 then
+              entity.dead = true
+          elseif not entity.dead then
+              entity:processAI({room = self}, dt)
+              entity:update(dt)
+          end
 
-        -- collision between the player and entities in the room
-        if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
-            gSounds['hit-player']:play()
-            self.player:damage(1)
-            self.player:goInvulnerable(1.5)
+          -- collision between the player and entities in the room
+          if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
+              gSounds['hit-player']:play()
+              self.player:damage(1)
+              self.player:goInvulnerable(1.5)
 
-            if self.player.health == 0 then
-                gStateMachine:change('game-over')
-            end
-        end
-    end
+              if self.player.health == 0 then
+                  gStateMachine:change('game-over')
+              end
+          end
+      end
 
-    for k, object in pairs(self.objects) do
-        object:update(dt)
+      for k, object in pairs(self.objects) do
+          object:update(dt)
 
-        -- trigger collision callback on object
-        if self.player:collides(object) then
-            object:onCollide()
-        end
+          -- trigger collision callback on object
+          if self.player:collides(object) then
+              object:onCollide()
+          end
+      end
     end
     
+    
 end
+
 
 function Room:render()
     
@@ -260,6 +267,8 @@ function Room:render()
         love.graphics.printf('Kill all the enemies to continue', 0, 20, VIRTUAL_WIDTH - 20, 'center')
       else 
         self.wait = false
+        self.player:cantPressSwitch(1.5)
+       
       end
     end
     

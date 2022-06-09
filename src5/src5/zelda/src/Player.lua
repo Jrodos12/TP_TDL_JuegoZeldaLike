@@ -10,10 +10,32 @@ Player = Class{__includes = Entity}
 
 function Player:init(def)
     Entity.init(self, def)
+    self.switchinvulnerable = false
+    self.switchinvulnerableDuration = 0
+    self.switchinvulnerableTimer = 0
+    self.switchflashTimer = 0
+    
 end
+
+function Player:cantPressSwitch(duration)
+    self.switchinvulnerable = true
+    self.switchinvulnerableDuration = duration
+end
+
 
 function Player:update(dt)
     Entity.update(self, dt)
+    if self.switchinvulnerable then
+      self.switchflashTimer = self.switchflashTimer + dt
+      self.switchinvulnerableTimer = self.switchinvulnerableTimer + dt
+
+    if self.switchinvulnerableTimer > self.switchinvulnerableDuration then
+        self.switchinvulnerable = false
+        self.switchinvulnerableTimer = 0
+        self.switchinvulnerableDuration = 0
+        self.switchflashTimer = 0
+    end
+  end--
 end
 
 function Player:collides(target)
