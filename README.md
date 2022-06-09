@@ -12,3 +12,5 @@ Modificaciones:
   Asi si damos la posibilidad de aumentar la cantidad de corazones o la vida, grafica en base a eso.
   - Puse un place holder de titulo
   - Cambie los codigos de colores q vi (en la version actual para el color usa de 0 a 1 y no de 0 a 255 como estaba
+  - Las puertas se abren solo cndo derrotas a todos los enemigos
+  - Los switch dan mensaje de que hay que hacer si no los podes abrir
