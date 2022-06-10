@@ -8,7 +8,11 @@
 
 require 'src/Dependencies'
 
+
 function love.load()
+    effect = Moonshine(Moonshine.effects.desaturate)
+    effect.desaturate.tint = {212, 22, 8}
+    
     math.randomseed(os.time())
     love.window.setTitle('Legend of Zelda')
     love.graphics.setDefaultFilter('nearest', 'nearest')
