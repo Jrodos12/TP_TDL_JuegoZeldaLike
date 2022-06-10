@@ -15,5 +15,6 @@ Modificaciones hechas:
   - Los switch dan mensaje de que hay que hacer si no los podes abrir
   - Entes titilan cndo invulnerables
   - Room titila rojo + sonido de corazon cndo queda poca vida
+ 
 Haciendose:
   - PlayerSecondAction y chests con llaves o contenedores de corazon
