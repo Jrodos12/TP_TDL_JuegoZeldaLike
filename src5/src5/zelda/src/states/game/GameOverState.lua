@@ -9,6 +9,7 @@
 GameOverState = Class{__includes = BaseState}
 
 function GameOverState:update(dt)
+    gSounds['heart']:stop()
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('start')
     end
