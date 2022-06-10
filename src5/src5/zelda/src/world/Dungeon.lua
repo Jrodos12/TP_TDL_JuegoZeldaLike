@@ -12,7 +12,11 @@ function Dungeon:init(player)
     self.player = player
 
     self.rooms = {}
-
+    
+    
+    self.light = 0
+    self.pulse = true
+    self.current = 0.6
     -- current room we're operating in
     self.currentRoom = Room(self.player)
 
@@ -119,7 +123,26 @@ end
 
 function Dungeon:update(dt)
     -- pause updating if we're in the middle of shifting
+    if self.player.health <=2 then
+         gSounds['heart']:setLooping(true)
+         gSounds['heart']:play()
+          if self.light>0 and self.pulse then
+          self.light = self.light - 0.005
+          effect.desaturate.strength = self.light
+          else
+            self.pulse = false
+            self.light = self.light + 0.005
+            effect.desaturate.strength = self.light
+            if self.light > 0.15 then
+              self.pulse = true
+            end
+          end--
+      else
+        effect.desaturate.strength = 0
+      end
+      
     if not self.shifting then    
+        
         self.currentRoom:update(dt)
     else
         -- still update the player animation if we're shifting rooms
@@ -133,8 +156,11 @@ function Dungeon:render()
         love.graphics.translate(-math.floor(self.cameraX), -math.floor(self.cameraY))
     end
 
-    self.currentRoom:render()
-    
+    effect(function()
+      self.currentRoom:render()
+    end)
+  
+  
     if self.nextRoom then
         self.nextRoom:render()
     end

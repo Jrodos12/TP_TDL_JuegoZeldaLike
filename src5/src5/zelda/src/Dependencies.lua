@@ -7,6 +7,7 @@ Class = require 'lib/class'
 Event = require 'lib/knife.event'
 push = require 'lib/push'
 Timer = require 'lib/knife.timer'
+Moonshine = require 'lib/moonshine'
 
 require 'src/Animation'
 require 'src/constants'
@@ -72,5 +73,7 @@ gSounds = {
     ['sword'] = love.audio.newSource('sounds/sword.wav',"static"),
     ['hit-enemy'] = love.audio.newSource('sounds/hit_enemy.wav',"static"),
     ['hit-player'] = love.audio.newSource('sounds/hit_player.wav',"static"),
-    ['door'] = love.audio.newSource('sounds/door.wav',"static")
+    ['door'] = love.audio.newSource('sounds/door.wav',"static"),
+    ['heart'] = love.audio.newSource('sounds/HeartBeat.wav',"static")
+    
 }
