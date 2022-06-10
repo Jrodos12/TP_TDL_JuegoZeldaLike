@@ -124,22 +124,22 @@ end
 function Dungeon:update(dt)
     -- pause updating if we're in the middle of shifting
     if self.player.health <=2 then
-         gSounds['heart']:setLooping(true)
-         gSounds['heart']:play()
-          if self.light>0 and self.pulse then
-          self.light = self.light - 0.005
+        gSounds['heart']:setLooping(true)
+        gSounds['heart']:play()
+        if self.light>0 and self.pulse then
+        self.light = self.light - 0.005
+        effect.desaturate.strength = self.light
+        else
+          self.pulse = false
+          self.light = self.light + 0.005
           effect.desaturate.strength = self.light
-          else
-            self.pulse = false
-            self.light = self.light + 0.005
-            effect.desaturate.strength = self.light
-            if self.light > 0.15 then
-              self.pulse = true
-            end
-          end--
-      else
-        effect.desaturate.strength = 0
-      end
+          if self.light > 0.15 then
+            self.pulse = true
+          end
+        end--
+    else
+      effect.desaturate.strength = 0
+    end
       
     if not self.shifting then    
         
