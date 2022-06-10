@@ -81,7 +81,7 @@ moonshine.chain = function(w,h,effect)
 
     -- present result
     love.graphics.setShader()
-    love.graphics.setCanvas(canvas)
+    love.graphics.setCanvas{canvas, stencil=true}
     love.graphics.draw(front,0,0)
 
     -- restore state
