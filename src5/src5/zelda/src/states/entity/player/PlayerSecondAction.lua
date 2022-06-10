@@ -6,9 +6,9 @@
     cogden@cs50.harvard.edu
 ]]
 
-PlayerSwingSwordState = Class{__includes = BaseState}
+PlayerSecondAction = Class{__includes = BaseState}
 
-function PlayerSwingSwordState:init(player, dungeon)
+function PlayerSecondAction:init(player, dungeon)
     self.player = player
     self.dungeon = dungeon
 
@@ -47,7 +47,7 @@ function PlayerSwingSwordState:init(player, dungeon)
     self.player:changeAnimation('sword-' .. self.player.direction)
 end
 
-function PlayerSwingSwordState:enter(params)
+function PlayerSecondAction:enter(params)
     gSounds['sword']:stop()
     gSounds['sword']:play()
 
@@ -55,7 +55,7 @@ function PlayerSwingSwordState:enter(params)
     self.player.currentAnimation:refresh()
 end
 
-function PlayerSwingSwordState:update(dt)
+function PlayerSecondAction:update(dt)
     -- check if hitbox collides with any entities in the scene
     for k, entity in pairs(self.dungeon.currentRoom.entities) do
         if entity:collides(self.swordHitbox) then
@@ -73,13 +73,10 @@ function PlayerSwingSwordState:update(dt)
     if love.keyboard.wasPressed('space') then
         self.player:changeState('swing-sword')
     end
-    if love.keyboard.wasPressed('z') then
-      self.player:changeState('second-action')
-    end
     
 end
 
-function PlayerSwingSwordState:render()
+function PlayerSecondAction:render()
     local anim = self.player.currentAnimation
     love.graphics.draw(gTextures[anim.texture], gFrames[anim.texture][anim:getCurrentFrame()],
         math.floor(self.player.x - self.player.offsetX), math.floor(self.player.y - self.player.offsetY))
