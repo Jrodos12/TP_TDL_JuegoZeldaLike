@@ -39,7 +39,7 @@ function StartState:render()
 
     love.graphics.setFont(gFonts['Triforce'])
     love.graphics.setColor(34, 34, 34, 255)
-    love.graphics.printf('*Titulo del Juego', 2, VIRTUAL_HEIGHT / 2 - 30, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Zelda: TDL Version', 2, VIRTUAL_HEIGHT / 2 - 30, VIRTUAL_WIDTH, 'center')
 
 
     love.graphics.setColor(255, 255, 255, 255)

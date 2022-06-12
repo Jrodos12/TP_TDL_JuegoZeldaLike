@@ -77,7 +77,6 @@ gSounds = {
     ['hit-enemy'] = love.audio.newSource('sounds/hit_enemy.wav',"static"),
     ['hit-player'] = love.audio.newSource('sounds/hit_player.wav',"static"),
     ['door'] = love.audio.newSource('sounds/door.wav',"static"),
-    ['heart'] = love.audio.newSource('sounds/HeartBeat.wav',"static")
-    
-    
+    ['heart'] = love.audio.newSource('sounds/HeartBeat.wav',"static"),
+    ['potion'] = love.audio.newSource('sounds/heal_sound_effect.mp3', "static")
 }
