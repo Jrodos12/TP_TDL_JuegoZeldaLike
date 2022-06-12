@@ -80,36 +80,57 @@ function Room:generateEntities()
     end
 end
 
+function generate_random_coordinates()
+    return math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16), 
+                    math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+end
+
+--[[ Esta funcion seria para emprolijar el agregado de pociones o de cualquier objeto
+en un futuro,pero de momento no puedo hacer que ande
+
+function add_potion(type,on_collide_behaviour,expected_index)
+    random_x, random_y = generate_random_coordinates()
+    table.insert(self.objects, GameObject(
+        GAME_OBJECT_DEFS[type],
+        random_x,
+        random_y
+    ))
+    local pot = self.objects[expected_index]
+    pot.onCollide = on_collide_behaviour
+end
+]]
+
 --[[
     Randomly creates an assortment of obstacles for the player to navigate around.
 ]]
 function Room:generateObjects()
-
+    --Insertamos en la tabla la pocion de vida
+    random_x, random_y = generate_random_coordinates()
     table.insert(self.objects, GameObject(
         GAME_OBJECT_DEFS['health-potion'],
-        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
-                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
-        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+        random_x,
+        random_y
     ))
-    local pot = self.objects[1]
-    pot.onCollide = function()
-        if pot.state == 'sitting' then
+
+    --Definimos una funcion que cure al jugador y cambie el estado del objeto
+    local heal_pot = self.objects[#self.objects]
+    heal_pot.onCollide = function()
+        if heal_pot.state == 'sitting' then
             gSounds['potion']:play()
             self.player.health = 8
         end
-        pot.state = 'used'
+        heal_pot.state = 'used'
     end
 
-    
+    --Insertamos el switch en la tabla
+    random_x, random_y = generate_random_coordinates()
     table.insert(self.objects, GameObject(
         GAME_OBJECT_DEFS['switch'],
-        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
-                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
-        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+        random_x,
+        random_y
     ))
-  
 
     -- get a reference to the switch
     local switch = self.objects[2]
@@ -138,23 +159,24 @@ function Room:generateObjects()
         end
     end
 
-    --esta porcion del codigo agrega al final porque puede agregarse o no a la tabla, 
-    --y necesitamos acceder al objeto mediante indice
-    if math.random(1,10) < 5 then
+    --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
+    if math.random(1,10) > 5 then
+        --Insertamos en la tabla la pocion de invulnerabilidad
+        random_x, random_y = generate_random_coordinates()
         table.insert(self.objects, GameObject(
             GAME_OBJECT_DEFS['invulnerability-potion'],
-            math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
-                        VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
-            math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+            random_x,
+            random_y
         ))
-        local pot = self.objects[3]
-        pot.onCollide = function()
-            if pot.state == 'sitting' then
+        --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
+        --Tambien cambia el estado del objeto
+        local inv_pot = self.objects[#self.objects]
+        inv_pot.onCollide = function()
+            if inv_pot.state == 'sitting' then
                 gSounds['invulnerability-potion']:play()
                 self.player:goInvulnerable(10)
             end
-            pot.state = 'used'
+            inv_pot.state = 'used'
         end
     end
 end
