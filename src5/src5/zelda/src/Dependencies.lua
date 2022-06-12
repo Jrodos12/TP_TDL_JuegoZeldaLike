@@ -45,7 +45,8 @@ gTextures = {
     ['character-swing-sword'] = love.graphics.newImage('graphics/character_swing_sword.png'),
     ['hearts'] = love.graphics.newImage('graphics/hearts.png'),
     ['switches'] = love.graphics.newImage('graphics/switches.png'),
-    ['entities'] = love.graphics.newImage('graphics/entities.png')
+    ['entities'] = love.graphics.newImage('graphics/entities.png'),
+    ['potion'] = love.graphics.newImage('graphics/potion.png')
 }
 
 gFrames = {
@@ -54,7 +55,8 @@ gFrames = {
     ['character-swing-sword'] = GenerateQuads(gTextures['character-swing-sword'], 32, 32),
     ['entities'] = GenerateQuads(gTextures['entities'], 16, 16),
     ['hearts'] = GenerateQuads(gTextures['hearts'], 16, 16),
-    ['switches'] = GenerateQuads(gTextures['switches'], 16, 18)
+    ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
+    ['potion'] = GenerateQuads(gTextures['potion'],16,16)
 }
 
 gFonts = {
@@ -76,5 +78,6 @@ gSounds = {
     ['hit-player'] = love.audio.newSource('sounds/hit_player.wav',"static"),
     ['door'] = love.audio.newSource('sounds/door.wav',"static"),
     ['heart'] = love.audio.newSource('sounds/HeartBeat.wav',"static")
+    
     
 }

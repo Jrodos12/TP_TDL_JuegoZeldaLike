@@ -15,6 +15,7 @@ Modificaciones hechas:
   - Los switch dan mensaje de que hay que hacer si no los podes abrir
   - Entes titilan cndo invulnerables
   - Room titila rojo + sonido de corazon cndo queda poca vida
+  - Pociones de vida aparecen en lugares random, recuperan toda la vida del jugador y se usan solo 1 vez
  
 Haciendose:
   - PlayerSecondAction y chests con llaves o contenedores de corazon

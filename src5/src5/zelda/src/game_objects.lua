@@ -24,7 +24,22 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
-    ['pot'] = {
+    ['potion'] = {
+        type = 'potion',
+        texture = 'potion',
+        frame = 4,
+        width = 16,
+        height = 16,
+        solid = False,
+        defaultState = 'sitting',
+        states = {
+            ['sitting'] = {
+                frame = 10
+            },
+            ['used'] = {
+                frame = 9
+            }
+        }
         -- TODO
     }
 }
