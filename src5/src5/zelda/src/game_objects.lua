@@ -40,6 +40,5 @@ GAME_OBJECT_DEFS = {
                 frame = 9
             }
         }
-        -- TODO
     }
 }

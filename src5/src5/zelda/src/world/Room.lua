@@ -95,6 +95,7 @@ function Room:generateObjects()
     local pot = self.objects[1]
     pot.onCollide = function()
         if pot.state == 'sitting' then
+            gSounds['potion']:play()
             self.player.health = 8
         end
         pot.state = 'used'
