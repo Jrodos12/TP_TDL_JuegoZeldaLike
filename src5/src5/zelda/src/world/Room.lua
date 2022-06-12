@@ -86,7 +86,7 @@ end
 function Room:generateObjects()
 
     table.insert(self.objects, GameObject(
-        GAME_OBJECT_DEFS['potion'],
+        GAME_OBJECT_DEFS['health-potion'],
         math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
                     VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
         math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
@@ -135,6 +135,26 @@ function Room:generateObjects()
               self.wait = true
               self.waitTime = 1.7
             end
+        end
+    end
+
+    --esta porcion del codigo agrega al final porque puede agregarse o no a la tabla, 
+    --y necesitamos acceder al objeto mediante indice
+    if math.random(1,10) < 5 then
+        table.insert(self.objects, GameObject(
+            GAME_OBJECT_DEFS['invulnerability-potion'],
+            math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                        VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+            math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+        ))
+        local pot = self.objects[3]
+        pot.onCollide = function()
+            if pot.state == 'sitting' then
+                gSounds['invulnerability-potion']:play()
+                self.player:goInvulnerable(10)
+            end
+            pot.state = 'used'
         end
     end
 end

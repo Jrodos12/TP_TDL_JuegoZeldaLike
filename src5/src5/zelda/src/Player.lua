@@ -22,7 +22,6 @@ function Player:cantPressSwitch(duration)
     self.switchinvulnerableDuration = duration
 end
 
-
 function Player:update(dt)
     Entity.update(self, dt)
     if self.switchinvulnerable then

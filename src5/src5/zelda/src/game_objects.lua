@@ -24,7 +24,7 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
-    ['potion'] = {
+    ['health-potion'] = {
         type = 'potion',
         texture = 'potion',
         frame = 4,
@@ -38,6 +38,24 @@ GAME_OBJECT_DEFS = {
             },
             ['used'] = {
                 frame = 9
+            }
+        }
+    },
+
+    ['invulnerability-potion'] = {
+        type = 'potion',
+        texture = 'potion',
+        frame = 4,
+        width = 16,
+        height = 16,
+        solid = False,
+        defaultState = 'sitting',
+        states = {
+            ['sitting'] = {
+                frame = 14
+            },
+            ['used'] = {
+                frame = 13
             }
         }
     }

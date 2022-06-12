@@ -31,7 +31,7 @@ function Entity:init(def)
 
     -- flags for flashing the entity when hit
     self.invulnerable = false
-    self.invulnerableDuration = 0
+    self.rableDuration = 0
     self.invulnerableTimer = 0
     self.flashTimer = 0
 

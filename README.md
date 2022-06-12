@@ -16,6 +16,7 @@ Modificaciones hechas:
   - Entes titilan cndo invulnerables
   - Room titila rojo + sonido de corazon cndo queda poca vida
   - Pociones de vida aparecen en lugares random, recuperan toda la vida del jugador y se usan solo 1 vez
+  - Pociones de invulnerabilidad aparecen a veces, otorgan invulnerabilidad por 10 segundos, tambien se usan 1 vez
  
 Haciendose:
   - PlayerSecondAction y chests con llaves o contenedores de corazon
