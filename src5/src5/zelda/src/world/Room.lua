@@ -337,7 +337,7 @@ function Room:render()
     
     love.graphics.setStencilTest()
 end
-function Room:generateDoorsWays(doorTop, doorRight, doorDown, doorLeft)
+function Room:generateDoorWays(doorTop, doorRight, doorDown, doorLeft)
   --door = Doorway('top', false, self)
   if doorTop then
     self.doorways['top'] = (Doorway('top', false, self))
@@ -353,7 +353,7 @@ function Room:generateDoorsWays(doorTop, doorRight, doorDown, doorLeft)
     self.doorways['right'] = (Doorway('right', false, self))
   end
 end  
-function Room:generateEntitie(enemy, quantity)
+function Room:generateEntity(enemy, quantity)
     --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
 
     for i = table.getn(self.entities) + 1 , (table.getn(self.entities) + quantity) do

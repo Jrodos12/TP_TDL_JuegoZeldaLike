@@ -14,6 +14,7 @@ function Player:init(def)
     self.switchinvulnerableDuration = 0
     self.switchinvulnerableTimer = 0
     self.switchflashTimer = 0
+    self.armor = 4
     
 end
 
@@ -49,4 +50,18 @@ function Player:render()
     -- love.graphics.setColor(255, 0, 255, 255)
     -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
     -- love.graphics.setColor(255, 255, 255, 255)
+end
+
+function Player:damage(dmg)
+    if not self.invulnerable then
+        if self.armor > 0 then
+            local remaining_damage = dmg - self.armor
+            self.armor = self.armor - dmg
+            if remaining_damage > 0 then
+                self.health = self.health - dmg
+            end
+        else
+            self.health = self.health - dmg
+        end
+    end
 end

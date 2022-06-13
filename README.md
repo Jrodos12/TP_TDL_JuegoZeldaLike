@@ -17,6 +17,8 @@ Modificaciones hechas:
   - Room titila rojo + sonido de corazon cndo queda poca vida
   - Pociones de vida aparecen en lugares random, recuperan toda la vida del jugador y se usan solo 1 vez
   - Pociones de invulnerabilidad aparecen a veces, otorgan invulnerabilidad por 10 segundos, tambien se usan 1 vez
+  - Se agrega sistema de armadura, el jugador arranca con cuatro "Escudos", que son mas debiles que los corazones (Cada escudo aguanta un golpe, a diferencia de cada corazon que aguanta 2)
  
 Haciendose:
   - PlayerSecondAction y chests con llaves o contenedores de corazon
+  - Implementar forma interesante de conseguir armadura (mediante llaves o algo parecido)
