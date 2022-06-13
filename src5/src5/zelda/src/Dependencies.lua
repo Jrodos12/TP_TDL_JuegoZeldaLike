@@ -47,7 +47,8 @@ gTextures = {
     ['hearts'] = love.graphics.newImage('graphics/hearts.png'),
     ['switches'] = love.graphics.newImage('graphics/switches.png'),
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
-    ['potion'] = love.graphics.newImage('graphics/potion.png')
+    ['potion'] = love.graphics.newImage('graphics/potion.png'),
+    ['armor'] = love.graphics.newImage('graphics/armor.png')
 }
 
 gFrames = {
@@ -57,7 +58,8 @@ gFrames = {
     ['entities'] = GenerateQuads(gTextures['entities'], 16, 16),
     ['hearts'] = GenerateQuads(gTextures['hearts'], 16, 16),
     ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
-    ['potion'] = GenerateQuads(gTextures['potion'],16,16)
+    ['potion'] = GenerateQuads(gTextures['potion'],16,16),
+    ['armor'] = GenerateQuads(gTextures['armor'],16,16)
 }
 
 gFonts = {

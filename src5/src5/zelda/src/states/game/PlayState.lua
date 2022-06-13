@@ -84,4 +84,9 @@ function PlayState:render()
         
         healthLeft = healthLeft - 2
     end
+
+    --Dibujamos armor
+    for i = 1, self.player.armor do
+        love.graphics.draw(gTextures['armor'], gFrames['armor'][5], (i - 1) * (TILE_SIZE + 1), 20)
+    end
 end
