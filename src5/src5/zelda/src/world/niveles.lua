@@ -15,14 +15,14 @@ end
 
 function room2(player)
   room = Room(player,0,2)
-  room:generateEntitie('bat', 0)
-  room:generateDoorsWays(false, false, true, true)
+  room:generateEntity('bat', 0)
+  room:generateDoorWays(false, false, true, true)
   return room
 end
 
 function room3(player)
   room = Room(player,0,2)
-  room:generateEntitie('bat', 0)
-  room:generateDoorsWays(true, false, false, false)
+  room:generateEntity('bat', 0)
+  room:generateDoorWays(true, false, false, false)
   return room
 end
