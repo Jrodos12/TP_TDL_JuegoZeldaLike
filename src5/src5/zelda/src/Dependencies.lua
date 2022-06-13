@@ -23,6 +23,7 @@ require 'src/Util'
 require 'src/world/Doorway'
 require 'src/world/Dungeon'
 require 'src/world/Room'
+require 'src/world/niveles'
 
 require 'src/states/BaseState'
 

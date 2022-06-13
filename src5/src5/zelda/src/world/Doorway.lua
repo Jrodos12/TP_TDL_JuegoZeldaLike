@@ -12,7 +12,7 @@ function Doorway:init(direction, open, room)
     self.direction = direction
     self.open = open
     self.room = room
-
+    
     if direction == 'left' then
         self.x = MAP_RENDER_OFFSET_X
         self.y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT / 2) * TILE_SIZE - TILE_SIZE

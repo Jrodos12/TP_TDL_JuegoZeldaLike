@@ -11,15 +11,17 @@ Dungeon = Class{}
 function Dungeon:init(player)
     self.player = player
 
-    self.rooms = {}
-    
-    
+    self.rooms = {{room1(player),room0(player) }, {room2(player), room3(player)}}
+    self.currentRoomx = 1
+    self.currentRoomy = 2
     self.light = 0
     self.pulse = true
     self.current = 0.6
     -- current room we're operating in
-    self.currentRoom = Room(self.player)
-
+    --table.insert(self.rooms, room0(player))
+    --table.insert(self.rooms, room1(player))
+    self.currentRoom = (self.rooms[self.currentRoomx][self.currentRoomy])
+    
     -- room we're moving camera to during a shift; becomes active room afterwards
     self.nextRoom = nil
 
@@ -31,28 +33,31 @@ function Dungeon:init(player)
     -- trigger camera translation and adjustment of rooms whenever the player triggers a shift
     -- via a doorway collision, triggered in PlayerWalkState
     Event.on('shift-left', function()
-        self:beginShifting(-VIRTUAL_WIDTH, 0)
+        self:beginShifting(-VIRTUAL_WIDTH, 0, 'right')
     end)
 
     Event.on('shift-right', function()
-        self:beginShifting(VIRTUAL_WIDTH, 0)
+        self:beginShifting(VIRTUAL_WIDTH, 0, 'left')
     end)
 
     Event.on('shift-up', function()
-        self:beginShifting(0, -VIRTUAL_HEIGHT)
+        self:beginShifting(0, -VIRTUAL_HEIGHT, 'down')
     end)
 
     Event.on('shift-down', function()
-        self:beginShifting(0, VIRTUAL_HEIGHT)
+        self:beginShifting(0, VIRTUAL_HEIGHT, 'top')
     end)
 end
 
 --[[
     Prepares for the camera shifting process, kicking off a tween of the camera position.
 ]]
-function Dungeon:beginShifting(shiftX, shiftY)
+function Dungeon:beginShifting(shiftX, shiftY,deDondeVengo)
     self.shifting = true
-    self.nextRoom = Room(self.player)
+    self.currentRoomx = self.currentRoomx + (shiftX / VIRTUAL_WIDTH)  
+    self.currentRoomy = self.currentRoomy + (shiftY / VIRTUAL_HEIGHT)
+    
+    self.nextRoom = (self.rooms[self.currentRoomx][self.currentRoomy])
 
     -- start all doors in next room as open until we get in
     for k, doorway in pairs(self.nextRoom.doorways) do
@@ -100,8 +105,9 @@ function Dungeon:beginShifting(shiftX, shiftY)
 
         -- close all doors in the current room
         for k, doorway in pairs(self.currentRoom.doorways) do
-            doorway.open = false
+              doorway.open = false
         end
+        (self.currentRoom.doorways[deDondeVengo]).open = true
 
         gSounds['door']:play()
     end)
