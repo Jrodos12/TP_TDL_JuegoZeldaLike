@@ -8,10 +8,11 @@
 
 Room = Class{}
 
-function Room:init(player)
+function Room:init(player, posx, posy)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
-    
+    self.posx = posx
+    self.posy = posy
     self.waitTimer = 0
     self.wait = false
     self.waitTime = 0
@@ -21,7 +22,7 @@ function Room:init(player)
 
     -- entities in the room
     self.entities = {}
-    self:generateEntities()
+    --self:generateEntities()
 
     -- game objects in the room
     self.objects = {}
@@ -29,10 +30,10 @@ function Room:init(player)
 
     -- doorways that lead to other dungeon rooms
     self.doorways = {}
-    table.insert(self.doorways, Doorway('top', false, self))
-    table.insert(self.doorways, Doorway('bottom', false, self))
-    table.insert(self.doorways, Doorway('left', false, self))
-    table.insert(self.doorways, Doorway('right', false, self))
+    --table.insert(self.doorways, Doorway('top', false, self))
+    --table.insert(self.doorways, Doorway('bottom', false, self))
+    --table.insert(self.doorways, Doorway('left', false, self))
+    --table.insert(self.doorways, Doorway('right', false, self))
 
     -- reference to player for collisions, etc.
     self.player = player
@@ -335,4 +336,50 @@ function Room:render()
     end
     
     love.graphics.setStencilTest()
+end
+function Room:generateDoorsWays(doorTop, doorRight, doorDown, doorLeft)
+  --door = Doorway('top', false, self)
+  if doorTop then
+    self.doorways['top'] = (Doorway('top', false, self))
+    
+  end
+  if doorDown then
+    self.doorways['down'] = (Doorway('down', false, self))
+  end
+  if doorLeft then
+    self.doorways['left'] = (Doorway('left', false, self))
+  end
+  if doorRight then
+    self.doorways['right'] = (Doorway('right', false, self))
+  end
+end  
+function Room:generateEntitie(enemy, quantity)
+    --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+
+    for i = table.getn(self.entities) + 1 , (table.getn(self.entities) + quantity) do
+        --local type = types[math.random(#types)]
+
+        table.insert(self.entities, Entity {
+            animations = ENTITY_DEFS[enemy].animations,
+            walkSpeed = ENTITY_DEFS[enemy].walkSpeed or 20,
+
+            -- ensure X and Y are within bounds of the map
+            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+            y = math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16),
+            
+            width = 16,
+            height = 16,
+
+            health = ENTITY_DEFS[enemy].health
+        })
+
+        self.entities[i].stateMachine = StateMachine {
+            ['walk'] = function() return EntityWalkState(self.entities[i]) end,
+            ['idle'] = function() return EntityIdleState(self.entities[i]) end
+        }
+
+        self.entities[i]:changeState('walk')
+    end
 end
