@@ -9,10 +9,13 @@
 GameOverState = Class{__includes = BaseState}
 
 function GameOverState:update(dt)
+    gSounds['music']:stop()
     gSounds['heart']:stop()
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    gSounds['game-over']:play()
+
+    --[[if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('start')
-    end
+    end]]
 
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
@@ -26,6 +29,6 @@ function GameOverState:render()
     love.graphics.printf('GAME OVER', 0, VIRTUAL_HEIGHT / 2 - 48, VIRTUAL_WIDTH, 'center')
     
     love.graphics.setFont(gFonts['zelda-small'])
-    love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 16, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Press Escape to Quit', 0, VIRTUAL_HEIGHT / 2 + 16, VIRTUAL_WIDTH, 'center')
     love.graphics.setColor(12/255, 98/255, 237/255, 1)
 end
