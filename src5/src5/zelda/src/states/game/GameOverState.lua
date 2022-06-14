@@ -13,9 +13,9 @@ function GameOverState:update(dt)
     gSounds['heart']:stop()
     gSounds['game-over']:play()
 
-    --[[if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('start')
-    end]]
+    end
 
     if love.keyboard.wasPressed('escape') then
         love.event.quit()

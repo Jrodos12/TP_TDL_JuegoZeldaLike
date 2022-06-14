@@ -154,7 +154,7 @@ function Dungeon:update(dt)
         -- still update the player animation if we're shifting rooms
         self.player.currentAnimation:update(dt)
     end
-    if self.player.health <=2 then
+    if self.player.health == 0 then
       self.currentRoomx = 1
       self.currentRoomy = 2
     end
