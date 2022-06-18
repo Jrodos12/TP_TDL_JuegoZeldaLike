@@ -15,7 +15,12 @@ function Player:init(def)
     self.switchinvulnerableTimer = 0
     self.switchflashTimer = 0
     self.armor = 0
+    self.grey_chest_keys = 0
     
+end
+
+function Player:give_grey_chest_keys(amount)
+    self.grey_chest_keys = self.grey_chest_keys + amount
 end
 
 function Player:add_armor(amount)

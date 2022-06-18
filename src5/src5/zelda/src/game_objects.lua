@@ -77,4 +77,23 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
+
+    ['key'] = {
+        type = 'key',
+        texture = 'key',
+        frame = 48,
+        width = 16,
+        height = 16,
+        solid = False,
+        defaultState = 'on-floor',
+        states = {
+            ['on-floor'] = {
+                frame = 19
+            },
+            ['has-been-picked-up'] = {
+                frame = 1 --esta frame es una parte del png que se borro deliberadamente para que
+                --parezca que la llave desaparece
+            }
+        }
+    },
 }

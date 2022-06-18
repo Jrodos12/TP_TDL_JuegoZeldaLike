@@ -49,7 +49,8 @@ gTextures = {
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
     ['potion'] = love.graphics.newImage('graphics/potion.png'),
     ['armor'] = love.graphics.newImage('graphics/armor.png'),
-    ['chest'] = love.graphics.newImage('graphics/chest-sprite.png')
+    ['chest'] = love.graphics.newImage('graphics/chest-sprite.png'),
+    ['key'] = love.graphics.newImage('graphics/items.png')
 }
 
 gFrames = {
@@ -61,7 +62,8 @@ gFrames = {
     ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
     ['potion'] = GenerateQuads(gTextures['potion'],16,16),
     ['armor'] = GenerateQuads(gTextures['armor'],16,16),
-    ['chest'] = GenerateQuads(gTextures['chest'],16,16)
+    ['chest'] = GenerateQuads(gTextures['chest'],16,16),
+    ['key'] = GenerateQuads(gTextures['key'],16,16)
 }
 
 gFonts = {
@@ -86,5 +88,6 @@ gSounds = {
     ['potion'] = love.audio.newSource('sounds/heal_sound_effect.mp3', "static"),
     ['invulnerability-potion'] = love.audio.newSource('sounds/power_up_sound_effect.mp3', "static"),
     ['game-over'] = love.audio.newSource('sounds/game_over_music.mp3', "static"),
-    ['chest'] = love.audio.newSource('sounds/chest-open-sound-effect.mp3', "static")
+    ['chest'] = love.audio.newSource('sounds/chest-open-sound-effect.mp3', "static"),
+    ['key'] = love.audio.newSource('sounds/pick_up_key.mp3', "static")
 }
