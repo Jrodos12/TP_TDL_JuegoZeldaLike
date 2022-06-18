@@ -23,7 +23,7 @@ function PlayState:init()
         health = 8, -- Esto cambia el valor pero hay q modificar la graficacion de corazones. Lo modifique para testing, CAMBIAR!!!
 
         -- rendering and collision offset for spaced sprites
-        offsetY = 5
+        offsetY = 3
     }
 
     self.dungeon = Dungeon(self.player)

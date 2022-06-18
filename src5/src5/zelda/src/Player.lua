@@ -63,14 +63,14 @@ function Player:collides(target)
     local selfY, selfHeight = self.y + self.height / 2, self.height - self.height / 2
     
     return not (self.x + self.width < target.x or self.x > target.x + target.width or
-                selfY + selfHeight < target.y or selfY > target.y + target.height)
+                selfY + selfHeight < target.y or selfY - 11 > target.y + target.height) --ajuste altura
 end
 
 function Player:render()
     Entity.render(self)
-    -- love.graphics.setColor(255, 0, 255, 255)
-    -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
-    -- love.graphics.setColor(255, 255, 255, 255)
+     --love.graphics.setColor(255, 0, 255, 255)
+     --love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
+     --love.graphics.setColor(255, 255, 255, 255)
 end
 
 function Player:damage(dmg)
