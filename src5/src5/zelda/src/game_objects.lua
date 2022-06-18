@@ -58,5 +58,23 @@ GAME_OBJECT_DEFS = {
                 frame = 13
             }
         }
-    }
+    },
+
+    ['chest'] = {
+        type = 'chest',
+        texture = 'chest',
+        frame = 15,
+        width = 16,
+        height = 16,
+        solid = False,
+        defaultState = 'closed',
+        states = {
+            ['closed'] = {
+                frame = 2
+            },
+            ['open'] = {
+                frame = 1
+            }
+        }
+    },
 }
