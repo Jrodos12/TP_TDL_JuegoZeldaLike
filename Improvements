@@ -35,3 +35,7 @@ Agregado Matias:
 -Podriamos agregar un power up que de mas velocidad de movimiento
 -Tambien uno que de la capacidad de hacer ataques a distancia con la espada (dificil)
 -Implementar proyectiles, nos abre muchas puertas y hasta puede significar una boss fight copada
+-Implementar que objetos como pociones y cofres no spawneen uno encima del otro
+-Agregar cofres especiales con mas armadura, que requieran llaves para abrirlos.
+-Emprolijar codigo de generacion de objetos aleatorios
+-Agregar mensajes estilo tutorial que expliquen pociones y cofres

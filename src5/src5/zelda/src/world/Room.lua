@@ -180,6 +180,27 @@ function Room:generateObjects()
             inv_pot.state = 'used'
         end
     end
+
+    --Hay un 50% de chance de que aparezca un cofre
+    if math.random(1,10) > 5 then
+        --Insertamos en la tabla el cofre
+        random_x, random_y = generate_random_coordinates()
+        table.insert(self.objects, GameObject(
+            GAME_OBJECT_DEFS['chest'],
+            random_x,
+            random_y
+        ))
+        --Definimos una funcion que de armadura al jugador
+        --Tambien cambia el estado del objeto
+        local chest = self.objects[#self.objects]
+        chest.onCollide = function()
+            if chest.state == 'closed' then
+                gSounds['chest']:play()
+                self.player:add_armor(1)
+            end
+            chest.state = 'open'
+        end
+    end
 end
 
 --[[

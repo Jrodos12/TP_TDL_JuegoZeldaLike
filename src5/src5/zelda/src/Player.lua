@@ -14,8 +14,14 @@ function Player:init(def)
     self.switchinvulnerableDuration = 0
     self.switchinvulnerableTimer = 0
     self.switchflashTimer = 0
-    self.armor = 4
+    self.armor = 0
     
+end
+
+function Player:add_armor(amount)
+    if self.armor < 4 then
+        self.armor = self.armor + amount
+    end
 end
 
 function Player:cantPressSwitch(duration)
