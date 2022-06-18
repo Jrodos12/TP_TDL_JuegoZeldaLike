@@ -41,3 +41,4 @@ Agregado Matias:
 -Agregar mensajes estilo tutorial que expliquen pociones y cofres
 -Mover comportamiento de objetos "onCollide" a otro modulo
 -Agregar distribucion de cofres plateados/llaves para que una llave de un nivel abra el cofre de otro (y asi sea un poco mas intersante)
+-Implementar visualizacion de cantidad de llaves que tiene el jugador - o Inventario
