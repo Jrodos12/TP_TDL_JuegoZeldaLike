@@ -39,3 +39,4 @@ Agregado Matias:
 -Agregar cofres especiales con mas armadura, que requieran llaves para abrirlos.
 -Emprolijar codigo de generacion de objetos aleatorios
 -Agregar mensajes estilo tutorial que expliquen pociones y cofres
+-Mover comportamiento de objetos "onCollide" a otro modulo

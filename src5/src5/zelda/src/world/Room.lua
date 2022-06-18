@@ -6,6 +6,7 @@
     cogden@cs50.harvard.edu
 ]]
 
+
 Room = Class{}
 
 function Room:init(player, posx, posy)
@@ -88,63 +89,39 @@ function generate_random_coordinates()
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
 end
 
---[[ Esta funcion seria para emprolijar el agregado de pociones o de cualquier objeto
-en un futuro,pero de momento no puedo hacer que ande
-
-function add_potion(type,on_collide_behaviour,expected_index)
+--Inserta un objeto a la tabla con coordenadas aleatorias, y le asigna un comportamiento
+--en el caso de que colisione con el jugador
+function add_object(table,room,type,on_collide_behaviour)
     random_x, random_y = generate_random_coordinates()
-    table.insert(self.objects, GameObject(
+    table.insert(room.objects, GameObject(
         GAME_OBJECT_DEFS[type],
         random_x,
         random_y
     ))
-    local pot = self.objects[expected_index]
-    pot.onCollide = on_collide_behaviour
+    local obj = room.objects[#room.objects]
+    obj.onCollide = on_collide_behaviour
 end
-]]
 
 --[[
     Randomly creates an assortment of obstacles for the player to navigate around.
 ]]
 function Room:generateObjects()
-    --Insertamos en la tabla la pocion de vida
-    random_x, random_y = generate_random_coordinates()
-    table.insert(self.objects, GameObject(
-        GAME_OBJECT_DEFS['health-potion'],
-        random_x,
-        random_y
-    ))
-
-    --Definimos una funcion que cure al jugador y cambie el estado del objeto
-    local heal_pot = self.objects[#self.objects]
-    heal_pot.onCollide = function()
+    function health_potion_on_collide(heal_pot)
         if heal_pot.state == 'sitting' then
             gSounds['potion']:play()
-            self.player.health = 8
+            self.player.health = 8 --Podriamos usar una variable para max health en el futuro
         end
         heal_pot.state = 'used'
     end
 
-    --Insertamos el switch en la tabla
-    random_x, random_y = generate_random_coordinates()
-    table.insert(self.objects, GameObject(
-        GAME_OBJECT_DEFS['switch'],
-        random_x,
-        random_y
-    ))
-
-    -- get a reference to the switch
-    local switch = self.objects[2]
-
     -- define a function for the switch that will open all doors in the room
-    switch.onCollide = function()
-        
+    function switch_on_collide(switch)     
         if switch.state == 'unpressed' and not self.player.switchinvulnerable then
             local allDead = true
             for k, entity in pairs(self.entities) do
               if not entity.dead then allDead = false end
             end
-            
+
             if allDead then
               switch.state = 'pressed'
               -- open every door in the room if we press the switch
@@ -160,46 +137,35 @@ function Room:generateObjects()
         end
     end
 
-    --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
-    if math.random(1,10) > 5 then
-        --Insertamos en la tabla la pocion de invulnerabilidad
-        random_x, random_y = generate_random_coordinates()
-        table.insert(self.objects, GameObject(
-            GAME_OBJECT_DEFS['invulnerability-potion'],
-            random_x,
-            random_y
-        ))
-        --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
-        --Tambien cambia el estado del objeto
-        local inv_pot = self.objects[#self.objects]
-        inv_pot.onCollide = function()
-            if inv_pot.state == 'sitting' then
-                gSounds['invulnerability-potion']:play()
-                self.player:goInvulnerable(10)
-            end
-            inv_pot.state = 'used'
+    --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
+    --Tambien cambia el estado del objet
+    function inv_pot_on_collide(inv_pot)
+        if inv_pot.state == 'sitting' then
+            gSounds['invulnerability-potion']:play()
+            self.player:goInvulnerable(10)
         end
+        inv_pot.state = 'used'
     end
 
-    --Hay un 50% de chance de que aparezca un cofre
-    if math.random(1,10) > 5 then
-        --Insertamos en la tabla el cofre
-        random_x, random_y = generate_random_coordinates()
-        table.insert(self.objects, GameObject(
-            GAME_OBJECT_DEFS['chest'],
-            random_x,
-            random_y
-        ))
-        --Definimos una funcion que de armadura al jugador
-        --Tambien cambia el estado del objeto
-        local chest = self.objects[#self.objects]
-        chest.onCollide = function()
-            if chest.state == 'closed' then
-                gSounds['chest']:play()
-                self.player:add_armor(1)
-            end
-            chest.state = 'open'
+    --Definimos una funcion que de armadura al jugador
+    --Tambien cambia el estado del objeto
+    function chest_on_collide(chest)
+        if chest.state == 'closed' then
+            gSounds['chest']:play()
+            self.player:add_armor(1)
         end
+        chest.state = 'open'
+    end
+
+    add_object(table,self,'health-potion',health_potion_on_collide)
+    add_object(table,self,'switch',switch_on_collide)
+    --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
+    if math.random(1,10) > 5 then
+        add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
+    end
+    --Hay un 50% de chance de que aparezca un cofre normal
+    if math.random(1,10) > 5 then
+        add_object(table,self,'chest',chest_on_collide)
     end
 end
 
