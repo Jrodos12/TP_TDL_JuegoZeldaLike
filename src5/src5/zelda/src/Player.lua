@@ -15,12 +15,22 @@ function Player:init(def)
     self.switchinvulnerableTimer = 0
     self.switchflashTimer = 0
     self.armor = 0
-    self.grey_chest_keys = 0
+    self.silver_chest_keys = 0
     
 end
 
-function Player:give_grey_chest_keys(amount)
-    self.grey_chest_keys = self.grey_chest_keys + amount
+function Player:give_silver_chest_keys(amount)
+    self.silver_chest_keys = self.silver_chest_keys + amount
+end
+
+function Player:try_to_open_silver_chest()
+    if self.silver_chest_keys == 0 then
+        return false
+    end
+    if self.silver_chest_keys > 0 then
+        self.silver_chest_keys = self.silver_chest_keys - 1
+        return true
+    end
 end
 
 function Player:add_armor(amount)

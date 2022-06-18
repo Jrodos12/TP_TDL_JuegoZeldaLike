@@ -78,6 +78,24 @@ GAME_OBJECT_DEFS = {
         }
     },
 
+    ['silver-chest'] = {
+        type = 'silver-chest',
+        texture = 'chest',
+        frame = 15,
+        width = 16,
+        height = 16,
+        solid = False,
+        defaultState = 'closed',
+        states = {
+            ['closed'] = {
+                frame = 8
+            },
+            ['open'] = {
+                frame = 7
+            }
+        }
+    },
+
     ['key'] = {
         type = 'key',
         texture = 'key',

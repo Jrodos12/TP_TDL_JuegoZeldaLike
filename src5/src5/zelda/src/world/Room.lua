@@ -157,17 +157,30 @@ function Room:generateObjects()
         chest.state = 'open'
     end
 
-    function grey_chest_key_on_collide(key)
+    function silver_chest_key_on_collide(key)
         if key.state == 'on-floor' then
             gSounds['key']:play()
-            self.player:give_grey_chest_keys(1)
+            self.player:give_silver_chest_keys(1)
         end
         key.state = 'has-been-picked-up'
     end
 
+    function silver_chest_on_collide(chest)
+        if chest.state == 'closed' and self.player:try_to_open_silver_chest() then
+            gSounds['chest']:play()
+            self.player:add_armor(2)
+            chest.state = 'open'
+        end
+    end
+
     add_object(table,self,'health-potion',health_potion_on_collide)
     add_object(table,self,'switch',switch_on_collide)
-    add_object(table,self,'key',grey_chest_key_on_collide)
+
+    --Hay un 20% de chance de que aparezca un cofre gris + su llave
+    if math.random(1,10) > 8 then
+        add_object(table,self,'key',silver_chest_key_on_collide)
+        add_object(table,self,'silver-chest',silver_chest_on_collide)
+    end
     --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
     if math.random(1,10) > 5 then
         add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
