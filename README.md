@@ -19,7 +19,7 @@ Modificaciones hechas:
   - Pociones de invulnerabilidad aparecen a veces, otorgan invulnerabilidad por 10 segundos, tambien se usan 1 vez
   - Se agrega sistema de armadura, el jugador arranca con cuatro "Escudos", que son mas debiles que los corazones (Cada escudo aguanta un golpe, a diferencia de cada corazon que aguanta 2)
   - Cada punto de armadura ahora se puede obtener a partir de cofres.
-  - Se puede obtener armadura de cofres normales (1 punto) y cofres plateados (2 puntos). Estos ultimos requieren llaves para ser abiertos.
+  - Se puede obtener armadura de cofres normales (1 punto) y cofres plateados (2 puntos). Estos ultimos requieren llaves para ser abiertos. El jugadoe acumula las llaves que encuentra.
  
 Haciendose:
   - PlayerSecondAction y chests con llaves o contenedores de corazon
