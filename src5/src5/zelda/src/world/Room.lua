@@ -157,8 +157,17 @@ function Room:generateObjects()
         chest.state = 'open'
     end
 
+    function grey_chest_key_on_collide(key)
+        if key.state == 'on-floor' then
+            gSounds['key']:play()
+            self.player:give_grey_chest_keys(1)
+        end
+        key.state = 'has-been-picked-up'
+    end
+
     add_object(table,self,'health-potion',health_potion_on_collide)
     add_object(table,self,'switch',switch_on_collide)
+    add_object(table,self,'key',grey_chest_key_on_collide)
     --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
     if math.random(1,10) > 5 then
         add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
