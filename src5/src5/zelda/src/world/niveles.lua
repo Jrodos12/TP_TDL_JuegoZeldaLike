@@ -1,6 +1,6 @@
 function room0(player)
 room = Room(player, 1, 1)
-room:generateEntity('bat', 2)
+--room:generateEntity('bat', 2)
 room:generateEntity('slime', 1)
 room:generateDoorWays(true, false, false, false)
 return room
