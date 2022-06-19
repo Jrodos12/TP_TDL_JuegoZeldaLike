@@ -9,11 +9,9 @@
 
 Room = Class{}
 
-function Room:init(player, posx, posy)
+function Room:init(player)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
-    self.posx = posx
-    self.posy = posy
     self.waitTimer = 0
     self.wait = false
     self.waitTime = 0
@@ -348,17 +346,17 @@ function Room:render()
 end
 function Room:generateDoorWays(doorTop, doorRight, doorDown, doorLeft)
   --door = Doorway('top', false, self)
-  if doorTop then
+  if doorTop == 'si' then
     self.doorways['top'] = (Doorway('top', false, self))
     
   end
-  if doorDown then
+  if doorDown == 'si' then
     self.doorways['down'] = (Doorway('down', false, self))
   end
-  if doorLeft then
+  if doorLeft == 'si' then
     self.doorways['left'] = (Doorway('left', false, self))
   end
-  if doorRight then
+  if doorRight == 'si' then
     self.doorways['right'] = (Doorway('right', false, self))
   end
 end  

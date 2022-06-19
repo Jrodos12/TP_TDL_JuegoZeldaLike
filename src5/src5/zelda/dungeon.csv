@@ -1,0 +1,6 @@
+2,2
+enemies,top_door,right_door,down_door,left_door
+bat:1,no,si,si,no
+slime:0;bat:2,si,si,no,no
+slime:0;skeleton:1,no,no,si,si
+bat:0,si,no,no,si
