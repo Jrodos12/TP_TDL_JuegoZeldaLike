@@ -1,0 +1,3 @@
+enemies,top_door,right_door,down_door,left_door
+slime:2-bat:2,si,no,no,no
+bat:1,no,si,si,no
