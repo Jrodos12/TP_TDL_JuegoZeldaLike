@@ -60,10 +60,7 @@ function Dungeon:beginShifting(shiftX, shiftY,deDondeVengo)
     self.nextRoom = (self.rooms[self.currentRoomx][self.currentRoomy])
 
     -- start all doors in next room as open until we get in
-    for k, doorway in pairs(self.nextRoom.doorways) do
-        doorway.open = true
-    end
-
+    self.nextRoom.doorways[deDondeVengo].open = true
     self.nextRoom.adjacentOffsetX = shiftX
     self.nextRoom.adjacentOffsetY = shiftY
 
@@ -104,11 +101,10 @@ function Dungeon:beginShifting(shiftX, shiftY,deDondeVengo)
         end
 
         -- close all doors in the current room
-        for k, doorway in pairs(self.currentRoom.doorways) do
-              doorway.open = false
-        end
+  --      for k, doorway in pairs(self.currentRoom.doorways) do
+  --            doorway.open = false
+  --      end
         (self.currentRoom.doorways[deDondeVengo]).open = true
-
         gSounds['door']:play()
     end)
 end
