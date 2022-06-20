@@ -140,7 +140,7 @@ function Room:generateObjects()
     function inv_pot_on_collide(inv_pot)
         if inv_pot.state == 'sitting' then
             gSounds['invulnerability-potion']:play()
-            self.player:goInvulnerable(10)
+            self.player:goInvulnerable(5)
         end
         inv_pot.state = 'used'
     end
@@ -171,8 +171,8 @@ function Room:generateObjects()
         end
     end
 
-    add_object(table,self,'health-potion',health_potion_on_collide)
-    add_object(table,self,'switch',switch_on_collide)
+    --add_object(table,self,'health-potion',health_potion_on_collide)
+    --add_object(table,self,'switch',switch_on_collide)
 
     --Hay un 20% de chance de que aparezca un cofre gris + su llave
     if math.random(1,10) > 8 then
@@ -390,3 +390,6 @@ function Room:generateEntity(enemy, quantity)
         self.entities[i]:changeState('walk')
     end
 end
+function Room:generateSwitch()
+  add_object(table,self,'switch',switch_on_collide)
+  end

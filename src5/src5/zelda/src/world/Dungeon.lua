@@ -11,8 +11,8 @@ Dungeon = Class{}
 function Dungeon:init(player)
     self.player = player
     self.rooms = loadDungeon("dungeon.csv", player)
-    self.currentRoomx = 1
-    self.currentRoomy = 2
+    self.currentRoomx = 2
+    self.currentRoomy = 6
     self.light = 0
     self.pulse = true
     self.current = 0.6

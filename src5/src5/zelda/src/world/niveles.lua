@@ -23,17 +23,24 @@ function loadDungeon(path, player)
   io.input(file)
   local dimensionDungeon = split (io.read(), ',')
   local alto,largo = dimensionDungeon[1], dimensionDungeon[2]
-  header = io.read()
+  io.read() --para saltearme el header del .csv
   for line in io.lines()  do
-    lineSplit = split(line,',')
-    local enemies,topDoor,leftDoor,downDoor,rightDoor,newRoom = lineSplit[1],lineSplit[2],lineSplit[3],lineSplit[4],lineSplit[5],Room(player)
+    local newRoom = Room(player)
+    if line == '' then
+      table.insert(rooms, newRoom)
+      goto next
+    end
+    local lineSplit = split(line,',')
+    local enemies,topDoor,leftDoor,downDoor,rightDoor,switch = lineSplit[1],lineSplit[2],lineSplit[3],lineSplit[4],lineSplit[5],lineSplit[6]
     for index, enemy in ipairs( split(enemies, ';') ) do
       local enemyData = split(enemy, ':')
       local nombre,cantidad = enemyData[1],enemyData[2]
       newRoom:generateEntity(nombre, cantidad)
       newRoom:generateDoorWays(topDoor,leftDoor,downDoor,rightDoor)
+      if switch == 'si' then newRoom:generateSwitch() end
     end
     table.insert(rooms, newRoom)
+    ::next::
   end
   io.close()
   local indice = 1
