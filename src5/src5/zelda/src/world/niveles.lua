@@ -37,8 +37,8 @@ function loadDungeon(path, player)
       local nombre,cantidad = enemyData[1],enemyData[2]
       newRoom:generateEntity(nombre, cantidad)
       newRoom:generateDoorWays(topDoor,leftDoor,downDoor,rightDoor)
-      if switch == 'si' then newRoom:generateSwitch() end
     end
+    if switch == 'si' then newRoom:generateSwitch() end
     table.insert(rooms, newRoom)
     ::next::
   end

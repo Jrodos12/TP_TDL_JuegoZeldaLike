@@ -2,7 +2,7 @@
 enemies,top_door,right_door,down_door,left_door,tiene_Switch,tiene_Cofre
 
 
-bat:1,no,si,no,no,si
+bat:1;slime:2,no,si,no,no,si
 
 
 
