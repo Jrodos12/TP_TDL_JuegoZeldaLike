@@ -402,10 +402,11 @@ function Room:generateEntity(enemy, quantity)
             y = math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                 VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16),
             
-            width = 16,
-            height = 16,
+            width = ENTITY_DEFS[enemy].width or 16,
+            height = ENTITY_DEFS[enemy].height or 16,
 
-            health = ENTITY_DEFS[enemy].health
+            health = ENTITY_DEFS[enemy].health,
+            isBoss = ENTITY_DEFS[enemy].isBoss or false
         })
 
         self.entities[i].stateMachine = StateMachine {
