@@ -58,9 +58,6 @@ GAME_OBJECT_DEFS = {
                 frame = 13
             }
         }
-<<<<<<< Updated upstream
-    }
-=======
     },
 
     ['chest'] = {
@@ -172,6 +169,5 @@ GAME_OBJECT_DEFS = {
                 frame = 1
             }
         }
-    },
->>>>>>> Stashed changes
+    }
 }
