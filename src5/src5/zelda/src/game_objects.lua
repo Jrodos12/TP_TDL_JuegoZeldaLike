@@ -114,4 +114,60 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
+        ['paper1'] = {
+        type = 'paper1',
+        texture = 'paper1',
+        frame = 1,
+        width = 18,
+        height = 14,
+        solid = true,
+        defaultState = 'whitepaper',
+        states = {
+            ['whitepaper'] = {
+                frame = 1
+            }
+        }
+    },
+    ['paper3'] = {
+        type = 'paper3',
+        texture = 'paper3',
+        frame = 1,
+        width = 18,
+        height = 14,
+        solid = true,
+        defaultState = 'whitepaper',
+        states = {
+            ['whitepaper'] = {
+                frame = 1
+            }
+        }
+    },  
+        ['paper2'] = {
+        type = 'paper2',
+        texture = 'paper2',
+        frame = 1,
+        width = 18,
+        height = 18,
+        solid = true,
+        defaultState = 'whitepaper',
+        states = {
+            ['whitepaper'] = {
+                frame = 1
+            }
+        }
+    },
+        ['poster'] = {
+        type = 'poster',
+        texture = 'poster',
+        frame = 1,
+        width = 12,
+        height = 11,
+        solid = true,
+        defaultState = 'whitepaper',
+        states = {
+            ['whitepaper'] = {
+                frame = 1
+            }
+        }
+    }
 }

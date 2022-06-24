@@ -22,7 +22,7 @@ function Room:init(player)
     -- entities in the room
     self.entities = {}
     --self:generateEntities()
-
+    
     -- game objects in the room
     self.objects = {}
     self:generateObjects()
@@ -135,6 +135,7 @@ function Room:generateObjects()
         end
     end
 
+
     --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
     --Tambien cambia el estado del objet
     function inv_pot_on_collide(inv_pot)
@@ -171,14 +172,39 @@ function Room:generateObjects()
         end
     end
 
+    function papersOnCollide(peper2)
+    end
     --add_object(table,self,'health-potion',health_potion_on_collide)
     --add_object(table,self,'switch',switch_on_collide)
+    -------------------------------- decoraciones
+    if math.random(1,10) > 6  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper1',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 4  then
+      for i=1,math.random(1,2) do
+      add_object(table,self,'paper2',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 5  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper3',papersOnCollide)
+      end
+    end    
+    ------------------------
+
+
+    --add_object(table,self,'health-potion',health_potion_on_collide)
+    --add_object(table,self,'switch',switch_on_collide)
+
 
     --Hay un 20% de chance de que aparezca un cofre gris + su llave
     if math.random(1,10) > 8 then
         add_object(table,self,'key',silver_chest_key_on_collide)
         add_object(table,self,'silver-chest',silver_chest_on_collide)
     end
+
     --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
     if math.random(1,10) > 5 then
         add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
