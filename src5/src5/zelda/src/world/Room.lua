@@ -23,7 +23,7 @@ function Room:init(player, posx, posy)
     -- entities in the room
     self.entities = {}
     --self:generateEntities()
-
+    
     -- game objects in the room
     self.objects = {}
     self:generateObjects()
@@ -160,6 +160,70 @@ function Room:generateObjects()
         end
     end
 
+<<<<<<< Updated upstream
+=======
+    --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
+    --Tambien cambia el estado del objet
+    function inv_pot_on_collide(inv_pot)
+        if inv_pot.state == 'sitting' then
+            gSounds['invulnerability-potion']:play()
+            self.player:goInvulnerable(5)
+        end
+        inv_pot.state = 'used'
+    end
+
+    --Definimos una funcion que de armadura al jugador
+    --Tambien cambia el estado del objeto
+    function chest_on_collide(chest)
+        if chest.state == 'closed' then
+            gSounds['chest']:play()
+            self.player:add_armor(1)
+        end
+        chest.state = 'open'
+    end
+
+    function silver_chest_key_on_collide(key)
+        if key.state == 'on-floor' then
+            gSounds['key']:play()
+            self.player:give_silver_chest_keys(1)
+        end
+        key.state = 'has-been-picked-up'
+    end
+
+    function silver_chest_on_collide(chest)
+        if chest.state == 'closed' and self.player:try_to_open_silver_chest() then
+            gSounds['chest']:play()
+            self.player:add_armor(2)
+            chest.state = 'open'
+        end
+    end
+    function papersOnCollide(peper2)
+    end
+    --add_object(table,self,'health-potion',health_potion_on_collide)
+    --add_object(table,self,'switch',switch_on_collide)
+    -------------------------------- decoraciones
+    if math.random(1,10) > 6  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper1',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 4  then
+      for i=1,math.random(1,2) do
+      add_object(table,self,'paper2',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 5  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper3',papersOnCollide)
+      end
+    end    
+    ------------------------
+    --Hay un 20% de chance de que aparezca un cofre gris + su llave
+    if math.random(1,10) > 8 then
+        add_object(table,self,'key',silver_chest_key_on_collide)
+        add_object(table,self,'silver-chest',silver_chest_on_collide)
+    end
+>>>>>>> Stashed changes
     --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
     if math.random(1,10) > 5 then
         --Insertamos en la tabla la pocion de invulnerabilidad

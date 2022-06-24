@@ -48,7 +48,18 @@ gTextures = {
     ['switches'] = love.graphics.newImage('graphics/switches.png'),
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
     ['potion'] = love.graphics.newImage('graphics/potion.png'),
+<<<<<<< Updated upstream
     ['armor'] = love.graphics.newImage('graphics/armor.png')
+=======
+    ['armor'] = love.graphics.newImage('graphics/armor.png'),
+    ['chest'] = love.graphics.newImage('graphics/chest-sprite.png'),
+    ['key'] = love.graphics.newImage('graphics/items.png'),
+    ['paper2'] = love.graphics.newImage('graphics/paper2.png'),
+    ['paper1'] = love.graphics.newImage('graphics/paper1.png'),
+    ['paper3'] = love.graphics.newImage('graphics/paper4.png'),
+    ['poster'] = love.graphics.newImage('graphics/poster.png'),
+    ['beam'] = love.graphics.newImage('graphics/proyectil.png')
+>>>>>>> Stashed changes
 }
 
 gFrames = {
@@ -59,7 +70,18 @@ gFrames = {
     ['hearts'] = GenerateQuads(gTextures['hearts'], 16, 16),
     ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
     ['potion'] = GenerateQuads(gTextures['potion'],16,16),
+<<<<<<< Updated upstream
     ['armor'] = GenerateQuads(gTextures['armor'],16,16)
+=======
+    ['armor'] = GenerateQuads(gTextures['armor'],16,16),
+    ['chest'] = GenerateQuads(gTextures['chest'],16,16),
+    ['key'] = GenerateQuads(gTextures['key'],16,16),
+    ['paper2'] = GenerateQuads(gTextures['paper2'],18,18),
+    ['paper1'] = GenerateQuads(gTextures['paper1'],18,14),
+    ['paper3'] = GenerateQuads(gTextures['paper3'],18,14),
+    ['poster'] = GenerateQuads(gTextures['poster'],12,11),
+    ['beam'] = GenerateQuads(gTextures['beam'],5,5)
+>>>>>>> Stashed changes
 }
 
 gFonts = {
