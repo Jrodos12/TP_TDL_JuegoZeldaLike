@@ -52,6 +52,7 @@ function loadDungeon(path, player)
       indice = indice + 1
     end
   end
-  
+  (dungeon[2][1]):generateKey();
+  (dungeon[1][3]):generateSilverChest()
   return dungeon
 end

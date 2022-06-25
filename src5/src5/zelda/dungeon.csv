@@ -2,37 +2,36 @@
 enemies,top_door,right_door,down_door,left_door,tiene_Switch,tiene_Cofre
 
 
-bat:1;slime:2,no,si,no,no,si,si
+slime:2;ghost:2,no,si,no,no,no
 
 
 
-bat:1,no,si,no,no,si,si
+skeleton:2;slime:3,no,si,no,no,no
 
-bat:4,no,si,si,si,si,no
-slime:0;bat:2,si,si,no,no,si,no
+ghost:2;slime:4,no,si,si,si,si,no
+bat:4;skeleton:1,si,si,no,no,si,no
+
+spider:4;ghost:2,no,si,no,no,si,no
+ghost:2;spider:3,no,no,si,si,si,no
+ghost:3;slime:2,si,no,si,no,si,no
+skeleton:3,si,si,si,si,si,no
+bat:2;skeleton:2,si,si,si,si,si,no
+slime:3;spider:2,si,no,si,no,si,no
+ghost:4,si,si,no,si,si,no
 
 
-slime:1;skeleton:0,no,si,no,no,si
-bat:0,no,no,si,si,si
-boss:0,si,no,si,no,si
-bat:1,si,si,si,si,si
-bat:1,si,si,si,si,si
-bat:1,si,no,si,no,si
-bat:1,si,si,no,si,si
+slime:2;ghost:2,no,si,si,si,si,no
+skeleton:3,si,no,no,si,si,no
 
+skeleton:3;slime:1;bat:4,no,no,no,si,no,si
 
-bat:4,no,si,si,si,si
-boss:0;bat:1,si,no,no,si,si
-
-boss:1,no,no,no,si,si
-
-bat:1,no,si,si,no,si,no
-bat:1,si,no,no,si,si,no
-
+skeleton:3;slime:1;bat:4,no,si,si,no,si,no
+skeleton:3;slime:1;bat:4,si,no,no,si,si,si
 
 
 
-bat:1,no,no,no,si,si,no
+
+boss:1,no,no,no,si,no,no
 
 
 
