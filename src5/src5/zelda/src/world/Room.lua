@@ -113,7 +113,7 @@ function Room:generateObjects()
     function health_potion_on_collide(heal_pot)
         if heal_pot.state == 'sitting' then
             gSounds['potion']:play()
-            self.player.health = 8 --Podriamos usar una variable para max health en el futuro
+            self.player.health = 4 --Podriamos usar una variable para max health en el futuro
         end
         heal_pot.state = 'used'
     end
@@ -147,7 +147,7 @@ function Room:generateObjects()
     function inv_pot_on_collide(inv_pot)
         if inv_pot.state == 'sitting' then
             gSounds['invulnerability-potion']:play()
-            self.player:goInvulnerable(5)
+            self.player:goInvulnerable(3)
         end
         inv_pot.state = 'used'
     end
@@ -157,7 +157,7 @@ function Room:generateObjects()
     function chest_on_collide(chest)
         if chest.state == 'closed' then
             gSounds['chest']:play()
-            self.player:add_armor(1)
+            self.player:add_armor(2)
         end
         chest.state = 'open'
     end
@@ -173,7 +173,7 @@ function Room:generateObjects()
     function silver_chest_on_collide(chest)
         if chest.state == 'closed' and self.player:try_to_open_silver_chest() then
             gSounds['chest']:play()
-            self.player:add_armor(2)
+            self.player:add_armor(8)
             chest.state = 'open'
         end
     end
@@ -205,19 +205,9 @@ function Room:generateObjects()
     --add_object(table,self,'switch',switch_on_collide)
 
 
-    --Hay un 20% de chance de que aparezca un cofre gris + su llave
+    --Hay un 20% de chance de que aparezca una pocion
     if math.random(1,10) > 8 then
-        add_object(table,self,'key',silver_chest_key_on_collide)
-        add_object(table,self,'silver-chest',silver_chest_on_collide)
-    end
-
-    --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
-    if math.random(1,10) > 5 then
-        add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
-    end
-    --Hay un 50% de chance de que aparezca un cofre normal
-    if math.random(1,10) > 5 then
-        add_object(table,self,'chest',chest_on_collide)
+      add_object(table,self,'health-potion',health_potion_on_collide)
     end
 end
 
@@ -498,4 +488,13 @@ function Room:generateEntity(enemy, quantity)
 end
 function Room:generateSwitch()
   add_object(table,self,'switch',switch_on_collide)
-  end
+end
+function Room:generateChest()
+  add_object(table,self,'chest',chest_on_collide)
+end
+function Room:generateSilverChest()
+  add_object(table,self,'silver-chest',silver_chest_on_collide)
+end
+function Room:generateKey()
+  add_object(table,self,'key',silver_chest_key_on_collide)
+end

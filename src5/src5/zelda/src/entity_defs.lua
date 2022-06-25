@@ -74,7 +74,7 @@ ENTITY_DEFS = {
     },
     ['skeleton'] = {
         texture = 'entities',
-        health = 3,
+        health = 4,
         animations = {
             ['walk-left'] = {
                 frames = {22, 23, 24, 23},

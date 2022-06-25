@@ -31,7 +31,7 @@ function loadDungeon(path, player)
       goto next
     end
     local lineSplit = split(line,',')
-    local enemies,topDoor,leftDoor,downDoor,rightDoor,switch = lineSplit[1],lineSplit[2],lineSplit[3],lineSplit[4],lineSplit[5],lineSplit[6]
+    local enemies,topDoor,leftDoor,downDoor,rightDoor,switch,chest = lineSplit[1],lineSplit[2],lineSplit[3],lineSplit[4],lineSplit[5],lineSplit[6],lineSplit[7]
     for index, enemy in ipairs( split(enemies, ';') ) do
       local enemyData = split(enemy, ':')
       local nombre,cantidad = enemyData[1],enemyData[2]
@@ -39,6 +39,7 @@ function loadDungeon(path, player)
       newRoom:generateDoorWays(topDoor,leftDoor,downDoor,rightDoor)
     end
     if switch == 'si' then newRoom:generateSwitch() end
+    if chest == 'si' then newRoom:generateChest() end
     table.insert(rooms, newRoom)
     ::next::
   end
@@ -51,6 +52,7 @@ function loadDungeon(path, player)
       indice = indice + 1
     end
   end
-  
+  (dungeon[2][1]):generateKey();
+  (dungeon[1][3]):generateSilverChest()
   return dungeon
 end
