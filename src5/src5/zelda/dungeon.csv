@@ -11,19 +11,20 @@ bat:1,no,si,no,no,si,si
 bat:4,no,si,si,si,si,no
 slime:0;bat:2,si,si,no,no,si,no
 
-slime:1;skeleton:0,no,si,no,no,si,no
-bat:0,no,no,si,si,si,no
-bat:1,si,no,si,no,si,no
-bat:1,si,si,si,si,si,no
-bat:1,si,si,si,si,si,no
-bat:1,si,no,si,no,si,no
-bat:1,si,si,no,si,si,no
+
+slime:1;skeleton:0,no,si,no,no,si
+bat:0,no,no,si,si,si
+boss:0,si,no,si,no,si
+bat:1,si,si,si,si,si
+bat:1,si,si,si,si,si
+bat:1,si,no,si,no,si
+bat:1,si,si,no,si,si
 
 
-bat:4,no,si,si,si,si,no
-boss:0,si,no,no,si,si,no
+bat:4,no,si,si,si,si
+boss:0;bat:1,si,no,no,si,si
 
-boss:1;bat:1,no,no,no,si,si,no
+boss:1,no,no,no,si,si
 
 bat:1,no,si,si,no,si,no
 bat:1,si,no,no,si,si,no

@@ -15,6 +15,12 @@ function Room:init(player)
     self.waitTimer = 0
     self.wait = false
     self.waitTime = 0
+
+    
+    self.waitTimerSW = 0
+    self.waitSW = false
+    self.waitTimeSW = 0
+
     
     self.tiles = {}
     self:generateWallsAndFloors()
@@ -263,17 +269,56 @@ function Room:update(dt)
 
     if not self.wait then
       self.player:update(dt)
+      
       for i = #self.entities, 1, -1 do
           local entity = self.entities[i]
-
+          -------------musica de jefe
+          local thereIsNoBoss = true
+            for k, entity in pairs(self.entities) do
+              if entity.isBoss then thereIsNoBoss = false end
+            end
+          if thereIsNoBoss then
+            gSounds['boss-music']:stop()
+            gSounds['music']:setLooping(true)
+            gSounds['music']:play()
+          else
+            gSounds['music']:stop()
+            gSounds['boss-music']:setLooping(true)
+            gSounds['boss-music']:play()
+          end
+          ------------------spawn enemigos
+          local enemies = 0
+          for k, entity in pairs(self.entities) do
+            if not entity.dead then enemies = enemies + 1 end
+          end
+          if not thereIsNoBoss and not self.waitSW then
+              if enemies < 12 then
+                local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+                local type = types[math.random(#types)]
+                self:generateEntityCorners(type, 1)
+                gSounds['spawn']:play()
+                self.waitSW = true
+                self.waitTimeSW = love.timer.getTime(0)
+                self.waitTimerSW = 5
+              end
+          elseif not thereIsNoBoss then
+              local timePassedSW = love.timer.getTime(0) - self.waitTimerSW
+              if timePassedSW > self.waitTimeSW then
+                self.waitSW = false
+                self.waitTimeSW = 0
+              end
+          end
           -- remove entity from the table if health is <= 0
           if entity.health <= 0 then
               entity.dead = true
+              if entity.isBoss then
+                gStateMachine:change('game-finished')
+              end
           elseif not entity.dead then
               entity:processAI({room = self}, dt)
               entity:update(dt)
           end
-
+---------------------------------
           -- collision between the player and entities in the room
           if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
               gSounds['hit-player']:play()
@@ -367,7 +412,6 @@ function Room:render()
        
       end
     end
-    
     love.graphics.setStencilTest()
 end
 function Room:generateDoorWays(doorTop, doorRight, doorDown, doorLeft)
@@ -386,6 +430,41 @@ function Room:generateDoorWays(doorTop, doorRight, doorDown, doorLeft)
     self.doorways['right'] = (Doorway('right', false, self))
   end
 end  
+function Room:generateEntityCorners(enemy, quantity)
+    --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+    local XCorners = {MAP_RENDER_OFFSET_X + TILE_SIZE,VIRTUAL_WIDTH - TILE_SIZE * 2 - 16}
+    local YCorners = {MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16}
+    for i = table.getn(self.entities) + 1 , (table.getn(self.entities) + quantity) do
+        --local type = types[math.random(#types)]
+
+        table.insert(self.entities, Entity {
+            animations = ENTITY_DEFS[enemy].animations,
+            walkSpeed = ENTITY_DEFS[enemy].walkSpeed or 30,
+
+            -- ensure X and Y are within bounds of the map
+            x = XCorners[math.random(#XCorners)],
+            y = YCorners[math.random(#YCorners)],
+            
+            width = ENTITY_DEFS[enemy].width or 16,
+            height = ENTITY_DEFS[enemy].height or 16,
+
+            health = ENTITY_DEFS[enemy].health,
+            isBoss = ENTITY_DEFS[enemy].isBoss or false
+        })
+
+        self.entities[i].stateMachine = StateMachine {
+            ['walk'] = function() return EntityWalkState(self.entities[i]) end,
+            ['idle'] = function() return EntityIdleState(self.entities[i]) end
+        }
+
+        self.entities[i]:changeState('walk')
+    end
+end
+function Room:generateSwitch()
+  add_object(table,self,'switch',switch_on_collide)
+end
+
 function Room:generateEntity(enemy, quantity)
     --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
 
@@ -402,10 +481,11 @@ function Room:generateEntity(enemy, quantity)
             y = math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                 VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16),
             
-            width = 16,
-            height = 16,
+            width = ENTITY_DEFS[enemy].width or 16,
+            height = ENTITY_DEFS[enemy].height or 16,
 
-            health = ENTITY_DEFS[enemy].health
+            health = ENTITY_DEFS[enemy].health,
+            isBoss = ENTITY_DEFS[enemy].isBoss or false
         })
 
         self.entities[i].stateMachine = StateMachine {
