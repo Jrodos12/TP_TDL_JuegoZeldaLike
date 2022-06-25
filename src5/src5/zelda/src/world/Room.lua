@@ -263,17 +263,36 @@ function Room:update(dt)
 
     if not self.wait then
       self.player:update(dt)
+      
       for i = #self.entities, 1, -1 do
           local entity = self.entities[i]
-
+          
+          local thereIsNoBoss = true
+            for k, entity in pairs(self.entities) do
+              if entity.isBoss then thereIsNoBoss = false end
+            end
+          if thereIsNoBoss then
+            self.bossRoom = false
+            gSounds['boss-music']:stop()
+            gSounds['music']:setLooping(true)
+            gSounds['music']:play()
+          else
+            self.bossRoom = true
+            gSounds['music']:stop()
+            gSounds['boss-music']:setLooping(true)
+            gSounds['boss-music']:play()
+          end
           -- remove entity from the table if health is <= 0
           if entity.health <= 0 then
               entity.dead = true
+              if entity.isBoss then
+                gStateMachine:change('game-finished')
+              end
           elseif not entity.dead then
               entity:processAI({room = self}, dt)
               entity:update(dt)
           end
-
+---------------------------------
           -- collision between the player and entities in the room
           if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
               gSounds['hit-player']:play()
