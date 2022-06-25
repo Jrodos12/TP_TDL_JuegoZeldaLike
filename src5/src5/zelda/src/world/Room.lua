@@ -113,7 +113,7 @@ function Room:generateObjects()
     function health_potion_on_collide(heal_pot)
         if heal_pot.state == 'sitting' then
             gSounds['potion']:play()
-            self.player.health = 4 --Podriamos usar una variable para max health en el futuro
+            self.player.health = self.player.health + 4  --Podriamos usar una variable para max health en el futuro
         end
         heal_pot.state = 'used'
     end
