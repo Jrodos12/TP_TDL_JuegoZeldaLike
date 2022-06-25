@@ -23,7 +23,7 @@ bat:1,si,si,no,si,si,no
 bat:4,no,si,si,si,si,no
 boss:0,si,no,no,si,si,no
 
-boss:1,no,no,no,si,si,no
+boss:1;bat:1,no,no,no,si,si,no
 
 bat:1,no,si,si,no,si,no
 bat:1,si,no,no,si,si,no
