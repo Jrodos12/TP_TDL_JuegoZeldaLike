@@ -103,5 +103,6 @@ gSounds = {
     ['chest'] = love.audio.newSource('sounds/chest-open-sound-effect.mp3', "static"),
     ['key'] = love.audio.newSource('sounds/pick_up_key.mp3', "static"),
     ['game-finished'] = love.audio.newSource('sounds/gamefinished.mp3', "static"),
-    ['boss-music'] = love.audio.newSource('sounds/bossmusic.mp3', "static")
+    ['boss-music'] = love.audio.newSource('sounds/bossmusic.mp3', "static"),
+    ['spawn'] = love.audio.newSource('sounds/spawn.mp3', "static")
 }
