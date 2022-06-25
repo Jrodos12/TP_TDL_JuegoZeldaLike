@@ -28,7 +28,8 @@ function Entity:init(def)
     self.walkSpeed = def.walkSpeed
 
     self.health = def.health
-
+    
+    self.isBoss = def.isBoss
     -- flags for flashing the entity when hit
     self.invulnerable = false
     self.rableDuration = 0

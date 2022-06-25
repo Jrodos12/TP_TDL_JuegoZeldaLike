@@ -11,9 +11,9 @@ bat:1,no,si,no,no,si
 bat:4,no,si,si,si,si
 slime:0;bat:2,si,si,no,no,si
 
-slime:0;skeleton:1,no,si,no,no,si
+slime:1;skeleton:0,no,si,no,no,si
 bat:0,no,no,si,si,si
-bat:1,si,no,si,no,si
+boss:0,si,no,si,no,si
 bat:1,si,si,si,si,si
 bat:1,si,si,si,si,si
 bat:1,si,no,si,no,si
@@ -21,9 +21,9 @@ bat:1,si,si,no,si,si
 
 
 bat:4,no,si,si,si,si
-bat:1,si,no,no,si,si
+boss:0;bat:1,si,no,no,si,si
 
-bat:1,no,no,no,si,si
+boss:1,no,no,no,si,si
 
 bat:1,no,si,si,no,si
 bat:1,si,no,no,si,si

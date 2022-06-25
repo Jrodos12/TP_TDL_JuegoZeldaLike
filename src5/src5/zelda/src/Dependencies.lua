@@ -38,6 +38,7 @@ require 'src/states/entity/player/PlayerSecondAction'
 require 'src/states/game/GameOverState'
 require 'src/states/game/PlayState'
 require 'src/states/game/StartState'
+require 'src/states/game/gamefinished'
 
 gTextures = {
     ['tiles'] = love.graphics.newImage('graphics/alt.png'),
@@ -100,5 +101,8 @@ gSounds = {
     ['invulnerability-potion'] = love.audio.newSource('sounds/power_up_sound_effect.mp3', "static"),
     ['game-over'] = love.audio.newSource('sounds/game_over_music.mp3', "static"),
     ['chest'] = love.audio.newSource('sounds/chest-open-sound-effect.mp3', "static"),
-    ['key'] = love.audio.newSource('sounds/pick_up_key.mp3', "static")
+    ['key'] = love.audio.newSource('sounds/pick_up_key.mp3', "static"),
+    ['game-finished'] = love.audio.newSource('sounds/gamefinished.mp3', "static"),
+    ['boss-music'] = love.audio.newSource('sounds/bossmusic.mp3', "static"),
+    ['spawn'] = love.audio.newSource('sounds/spawn.mp3', "static")
 }
