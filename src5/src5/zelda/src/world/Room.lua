@@ -392,4 +392,7 @@ function Room:generateEntity(enemy, quantity)
 end
 function Room:generateSwitch()
   add_object(table,self,'switch',switch_on_collide)
+end
+function Room:generateChest()
+  add_object(table,self,'chest',chest_on_collide)
   end
