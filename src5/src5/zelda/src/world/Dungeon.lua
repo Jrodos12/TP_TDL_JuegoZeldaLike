@@ -136,6 +136,7 @@ function Dungeon:update(dt)
           end
         end--
     else
+      gSounds['heart']:stop()
       effect.desaturate.strength = 0
     end
       
