@@ -87,7 +87,8 @@ gFonts = {
     ['zelda'] = love.graphics.newFont('fonts/zelda.otf', 64),
     ['Triforce'] = love.graphics.newFont('fonts/Triforce.ttf', 50),
     ['zelda-small'] = love.graphics.newFont('fonts/zelda.otf', 32),
-    ['zelda-small2'] = love.graphics.newFont('fonts/zelda.otf', 18)
+    ['zelda-small2'] = love.graphics.newFont('fonts/zelda.otf', 18),
+    ['info'] = love.graphics.newFont('fonts/font.ttf', 8)
 }
 
 gSounds = {

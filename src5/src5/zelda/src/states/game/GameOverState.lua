@@ -15,6 +15,9 @@ function GameOverState:update(dt)
     gSounds['game-over']:play()
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gSounds['game-over']:stop()
+        gSounds['music']:setLooping(true)
+        gSounds['music']:play()
         gStateMachine:change('start')
     end
 
