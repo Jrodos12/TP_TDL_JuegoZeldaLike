@@ -18,13 +18,9 @@ function split(pString, pPattern)
 end
 
 function loadDungeon(path, player)
-  local file = io.open(path,"r")
   local lineSplit,rooms, dungeon = {}, {},{}
-  io.input(file)
-  local dimensionDungeon = split (io.read(), ',')
-  local alto,largo = dimensionDungeon[1], dimensionDungeon[2]
-  io.read() --para saltearme el header del .csv
-  for line in io.lines()  do
+  local alto,largo = 6,6
+  for line in love.filesystem.lines(path)  do
     local newRoom = Room(player)
     if line == '' then
       table.insert(rooms, newRoom)
@@ -43,7 +39,6 @@ function loadDungeon(path, player)
     table.insert(rooms, newRoom)
     ::next::
   end
-  io.close()
   local indice = 1
   for j = 1, largo do
     table.insert(dungeon, {})
