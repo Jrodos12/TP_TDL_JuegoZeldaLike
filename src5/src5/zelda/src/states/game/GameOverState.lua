@@ -10,10 +10,14 @@ GameOverState = Class{__includes = BaseState}
 
 function GameOverState:update(dt)
     gSounds['music']:stop()
+    gSounds['boss-music']:stop()
     gSounds['heart']:stop()
     gSounds['game-over']:play()
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gSounds['game-over']:stop()
+        gSounds['music']:setLooping(true)
+        gSounds['music']:play()
         gStateMachine:change('start')
     end
 
@@ -23,7 +27,7 @@ function GameOverState:update(dt)
 end
 
 function GameOverState:render()
-
+    
     love.graphics.setFont(gFonts['Triforce'])
     love.graphics.setColor(196/255, 8/255, 52/255, 240/255)
     love.graphics.printf('GAME OVER', 0, VIRTUAL_HEIGHT / 2 - 48, VIRTUAL_WIDTH, 'center')

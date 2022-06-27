@@ -23,7 +23,7 @@ function PlayState:init()
         health = 8, -- Esto cambia el valor pero hay q modificar la graficacion de corazones. Lo modifique para testing, CAMBIAR!!!
 
         -- rendering and collision offset for spaced sprites
-        offsetY = 5
+        offsetY = 3
     }
 
     self.dungeon = Dungeon(self.player)
@@ -62,7 +62,16 @@ function PlayState:render()
   
     -- ********** MODIFICACION: ahora los corazones se dibujan en base a cuanta vida tiene
     -- asi si le agremos hearts conteiners (posibilidad de recuperar vida) se modifica en base a eso
-   
+    love.graphics.draw(gTextures['potion'], gFrames['potion'][10],
+        120, 2)
+    love.graphics.setFont(gFonts['info'])
+    love.graphics.setColor(1, 1, 1, 0.95)
+    love.graphics.printf('= Heal',135, 10,100)
+    love.graphics.draw(gTextures['potion'], gFrames['potion'][14],
+        165, 3)
+    love.graphics.printf('= 7s Invulnerability',180, 10,100)
+    love.graphics.printf('Espace: Attack  Arrows: Move',300, 2,70
+    )
    local heartsDraw = self.player.health -- Como redondea division para abajo y existe tener medio corazon, si es impar tiene q igual dibujar un corazon mas
     if heartsDraw % 2 == 0 then
       heartsDraw = heartsDraw / 2

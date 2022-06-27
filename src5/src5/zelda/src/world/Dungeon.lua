@@ -10,16 +10,13 @@ Dungeon = Class{}
 
 function Dungeon:init(player)
     self.player = player
-
-    self.rooms = {{room1(player),room0(player) }, {room2(player), room3(player)}}
-    self.currentRoomx = 1
-    self.currentRoomy = 2
+    self.rooms = loadDungeon("dungeon.csv", player)
+    self.currentRoomx = 2
+    self.currentRoomy = 6
     self.light = 0
     self.pulse = true
     self.current = 0.6
     -- current room we're operating in
-    --table.insert(self.rooms, room0(player))
-    --table.insert(self.rooms, room1(player))
     self.currentRoom = (self.rooms[self.currentRoomx][self.currentRoomy])
     
     -- room we're moving camera to during a shift; becomes active room afterwards
@@ -56,14 +53,10 @@ function Dungeon:beginShifting(shiftX, shiftY,deDondeVengo)
     self.shifting = true
     self.currentRoomx = self.currentRoomx + (shiftX / VIRTUAL_WIDTH)  
     self.currentRoomy = self.currentRoomy + (shiftY / VIRTUAL_HEIGHT)
-    
     self.nextRoom = (self.rooms[self.currentRoomx][self.currentRoomy])
 
     -- start all doors in next room as open until we get in
-    for k, doorway in pairs(self.nextRoom.doorways) do
-        doorway.open = true
-    end
-
+    self.nextRoom.doorways[deDondeVengo].open = true
     self.nextRoom.adjacentOffsetX = shiftX
     self.nextRoom.adjacentOffsetY = shiftY
 
@@ -104,11 +97,10 @@ function Dungeon:beginShifting(shiftX, shiftY,deDondeVengo)
         end
 
         -- close all doors in the current room
-        for k, doorway in pairs(self.currentRoom.doorways) do
-              doorway.open = false
-        end
+  --      for k, doorway in pairs(self.currentRoom.doorways) do
+  --            doorway.open = false
+  --      end
         (self.currentRoom.doorways[deDondeVengo]).open = true
-
         gSounds['door']:play()
     end)
 end
@@ -144,6 +136,7 @@ function Dungeon:update(dt)
           end
         end--
     else
+      gSounds['heart']:stop()
       effect.desaturate.strength = 0
     end
       

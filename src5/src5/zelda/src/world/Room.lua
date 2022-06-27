@@ -9,14 +9,18 @@
 
 Room = Class{}
 
-function Room:init(player, posx, posy)
+function Room:init(player)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
-    self.posx = posx
-    self.posy = posy
     self.waitTimer = 0
     self.wait = false
     self.waitTime = 0
+
+    
+    self.waitTimerSW = 0
+    self.waitSW = false
+    self.waitTimeSW = 0
+
     
     self.tiles = {}
     self:generateWallsAndFloors()
@@ -24,7 +28,7 @@ function Room:init(player, posx, posy)
     -- entities in the room
     self.entities = {}
     --self:generateEntities()
-
+    
     -- game objects in the room
     self.objects = {}
     self:generateObjects()
@@ -109,7 +113,11 @@ function Room:generateObjects()
     function health_potion_on_collide(heal_pot)
         if heal_pot.state == 'sitting' then
             gSounds['potion']:play()
-            self.player.health = 8 --Podriamos usar una variable para max health en el futuro
+            if self.player.health <= 8 then
+            self.player.health = self.player.health + 4  --Podriamos usar una variable para max health en el futuro
+          else 
+            self.player.health = 12
+          end
         end
         heal_pot.state = 'used'
     end
@@ -137,12 +145,13 @@ function Room:generateObjects()
         end
     end
 
+
     --Definimos una funcion que de invulnerabilidad al jugador por 10 segundos
     --Tambien cambia el estado del objet
     function inv_pot_on_collide(inv_pot)
         if inv_pot.state == 'sitting' then
             gSounds['invulnerability-potion']:play()
-            self.player:goInvulnerable(10)
+            self.player:goInvulnerable(3)
         end
         inv_pot.state = 'used'
     end
@@ -152,7 +161,7 @@ function Room:generateObjects()
     function chest_on_collide(chest)
         if chest.state == 'closed' then
             gSounds['chest']:play()
-            self.player:add_armor(1)
+            self.player:add_armor(2)
         end
         chest.state = 'open'
     end
@@ -168,26 +177,41 @@ function Room:generateObjects()
     function silver_chest_on_collide(chest)
         if chest.state == 'closed' and self.player:try_to_open_silver_chest() then
             gSounds['chest']:play()
-            self.player:add_armor(2)
+            self.player:add_armor(8)
             chest.state = 'open'
         end
     end
 
-    add_object(table,self,'health-potion',health_potion_on_collide)
-    add_object(table,self,'switch',switch_on_collide)
+    function papersOnCollide(peper2)
+    end
+    --add_object(table,self,'health-potion',health_potion_on_collide)
+    --add_object(table,self,'switch',switch_on_collide)
+    -------------------------------- decoraciones
+    if math.random(1,10) > 6  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper1',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 4  then
+      for i=1,math.random(1,2) do
+      add_object(table,self,'paper2',papersOnCollide)
+      end
+    end
+    if math.random(1,10) > 5  then
+      for i=1,math.random(1,2) do
+        add_object(table,self,'paper3',papersOnCollide)
+      end
+    end    
+    ------------------------
 
-    --Hay un 20% de chance de que aparezca un cofre gris + su llave
+
+    --add_object(table,self,'health-potion',health_potion_on_collide)
+    --add_object(table,self,'switch',switch_on_collide)
+
+
+    --Hay un 20% de chance de que aparezca una pocion
     if math.random(1,10) > 8 then
-        add_object(table,self,'key',silver_chest_key_on_collide)
-        add_object(table,self,'silver-chest',silver_chest_on_collide)
-    end
-    --Hay un 50% de chance de que aparezca la pocion de invulnerabilidad
-    if math.random(1,10) > 5 then
-        add_object(table,self,'invulnerability-potion',inv_pot_on_collide)
-    end
-    --Hay un 50% de chance de que aparezca un cofre normal
-    if math.random(1,10) > 5 then
-        add_object(table,self,'chest',chest_on_collide)
+      add_object(table,self,'health-potion',health_potion_on_collide)
     end
 end
 
@@ -239,17 +263,56 @@ function Room:update(dt)
 
     if not self.wait then
       self.player:update(dt)
+      
       for i = #self.entities, 1, -1 do
           local entity = self.entities[i]
-
+          -------------musica de jefe
+          local thereIsNoBoss = true
+            for k, entity in pairs(self.entities) do
+              if entity.isBoss then thereIsNoBoss = false end
+            end
+          if thereIsNoBoss then
+            gSounds['boss-music']:stop()
+            gSounds['music']:setLooping(true)
+            gSounds['music']:play()
+          else
+            gSounds['music']:stop()
+            gSounds['boss-music']:setLooping(true)
+            gSounds['boss-music']:play()
+          end
+          ------------------spawn enemigos
+          local enemies = 0
+          for k, entity in pairs(self.entities) do
+            if not entity.dead then enemies = enemies + 1 end
+          end
+          if not thereIsNoBoss and not self.waitSW then
+              if enemies < 12 then
+                local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+                local type = types[math.random(#types)]
+                self:generateEntityCorners(type, 1)
+                gSounds['spawn']:play()
+                self.waitSW = true
+                self.waitTimeSW = love.timer.getTime(0)
+                self.waitTimerSW = 5
+              end
+          elseif not thereIsNoBoss then
+              local timePassedSW = love.timer.getTime(0) - self.waitTimerSW
+              if timePassedSW > self.waitTimeSW then
+                self.waitSW = false
+                self.waitTimeSW = 0
+              end
+          end
           -- remove entity from the table if health is <= 0
           if entity.health <= 0 then
               entity.dead = true
+              if entity.isBoss then
+                gStateMachine:change('game-finished')
+              end
           elseif not entity.dead then
               entity:processAI({room = self}, dt)
               entity:update(dt)
           end
-
+---------------------------------
           -- collision between the player and entities in the room
           if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
               gSounds['hit-player']:play()
@@ -343,25 +406,59 @@ function Room:render()
        
       end
     end
-    
     love.graphics.setStencilTest()
 end
 function Room:generateDoorWays(doorTop, doorRight, doorDown, doorLeft)
   --door = Doorway('top', false, self)
-  if doorTop then
+  if doorTop == 'si' then
     self.doorways['top'] = (Doorway('top', false, self))
     
   end
-  if doorDown then
+  if doorDown == 'si' then
     self.doorways['down'] = (Doorway('down', false, self))
   end
-  if doorLeft then
+  if doorLeft == 'si' then
     self.doorways['left'] = (Doorway('left', false, self))
   end
-  if doorRight then
+  if doorRight == 'si' then
     self.doorways['right'] = (Doorway('right', false, self))
   end
 end  
+function Room:generateEntityCorners(enemy, quantity)
+    --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+    local XCorners = {MAP_RENDER_OFFSET_X + TILE_SIZE,VIRTUAL_WIDTH - TILE_SIZE * 2 - 16}
+    local YCorners = {MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16}
+    for i = table.getn(self.entities) + 1 , (table.getn(self.entities) + quantity) do
+        --local type = types[math.random(#types)]
+
+        table.insert(self.entities, Entity {
+            animations = ENTITY_DEFS[enemy].animations,
+            walkSpeed = ENTITY_DEFS[enemy].walkSpeed or 30,
+
+            -- ensure X and Y are within bounds of the map
+            x = XCorners[math.random(#XCorners)],
+            y = YCorners[math.random(#YCorners)],
+            
+            width = ENTITY_DEFS[enemy].width or 16,
+            height = ENTITY_DEFS[enemy].height or 16,
+
+            health = ENTITY_DEFS[enemy].health,
+            isBoss = ENTITY_DEFS[enemy].isBoss or false
+        })
+
+        self.entities[i].stateMachine = StateMachine {
+            ['walk'] = function() return EntityWalkState(self.entities[i]) end,
+            ['idle'] = function() return EntityIdleState(self.entities[i]) end
+        }
+
+        self.entities[i]:changeState('walk')
+    end
+end
+function Room:generateSwitch()
+  add_object(table,self,'switch',switch_on_collide)
+end
+
 function Room:generateEntity(enemy, quantity)
     --local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
 
@@ -378,10 +475,11 @@ function Room:generateEntity(enemy, quantity)
             y = math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                 VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16),
             
-            width = 16,
-            height = 16,
+            width = ENTITY_DEFS[enemy].width or 16,
+            height = ENTITY_DEFS[enemy].height or 16,
 
-            health = ENTITY_DEFS[enemy].health
+            health = ENTITY_DEFS[enemy].health,
+            isBoss = ENTITY_DEFS[enemy].isBoss or false
         })
 
         self.entities[i].stateMachine = StateMachine {
@@ -391,4 +489,16 @@ function Room:generateEntity(enemy, quantity)
 
         self.entities[i]:changeState('walk')
     end
+end
+function Room:generateSwitch()
+  add_object(table,self,'switch',switch_on_collide)
+end
+function Room:generateChest()
+  add_object(table,self,'chest',chest_on_collide)
+end
+function Room:generateSilverChest()
+  add_object(table,self,'silver-chest',silver_chest_on_collide)
+end
+function Room:generateKey()
+  add_object(table,self,'key',silver_chest_key_on_collide)
 end
