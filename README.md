@@ -18,7 +18,9 @@ Modificaciones hechas:
   - Pociones de invulnerabilidad aparecen a veces, otorgan invulnerabilidad por 10 segundos, tambien se usan 1 vez
   - Se agrega sistema de armadura, el jugador arranca con cuatro "Escudos", que son mas debiles que los corazones (Cada escudo aguanta un golpe, a diferencia de cada corazon que aguanta 2). Cada punto de armadura ahora se puede obtener a partir de cofres.
   - Se puede obtener armadura de cofres normales (1 punto) y cofres plateados (2 puntos). Estos ultimos requieren llaves para ser abiertos.
-  - Jefe + cambio de musica en su sala + musica distinta para cada stage
+  - Jefe nuevo arte + jefe tiene mas tiempo de invulnerabilidad + cambio de musica en su sala cuando entras y salis + musica distinta para cada stage.
   - Decoraciones en el piso y paredes 
   - Mapa, objetos y enemigos fijos.
   - pantalla de juego ganado
+  - Enemigos spawnean en las esquinas del juego en el cuarto del jefe + sonido correspondiente.
+  
