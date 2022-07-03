@@ -148,8 +148,8 @@ function Dungeon:update(dt)
         self.player.currentAnimation:update(dt)
     end
     if self.player.health == 0 then
-      self.currentRoomx = 1
-      self.currentRoomy = 2
+      self.currentRoomx = 2
+      self.currentRoomy = 6 
     end
 end
 

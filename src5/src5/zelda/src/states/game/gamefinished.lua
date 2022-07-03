@@ -10,6 +10,12 @@ function GameFinishedState:update(dt)
         gSounds['game-finished']:stop()
         gSounds['music']:setLooping(true)
         gSounds['music']:play()
+        gStateMachine = StateMachine {
+        ['start'] = function() return StartState() end,
+        ['play'] = function() return PlayState() end,
+        ['game-over'] = function() return GameOverState() end,
+        ['game-finished'] = function() return GameFinishedState() end
+    }
         gStateMachine:change('start')
     end
 
