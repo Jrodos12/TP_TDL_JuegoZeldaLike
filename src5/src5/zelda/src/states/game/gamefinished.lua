@@ -7,6 +7,9 @@ function GameFinishedState:update(dt)
     gSounds['game-finished']:play()
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gSounds['game-finished']:stop()
+        gSounds['music']:setLooping(true)
+        gSounds['music']:play()
         gStateMachine:change('start')
     end
 

@@ -248,47 +248,47 @@ ENTITY_DEFS = {
     },
     ['boss'] = {
         walkSpeed = 40,
-        texture = 'character-walk',
+        texture = 'jefewalk',
         health = 5,
-        width = 16,
-        height = 28,
+        width = 23,
+        height = 40,
         isBoss = true,
         animations = {
             ['walk-left'] = {
                 frames = {13, 14, 15, 16},
                 interval = 0.155,
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['walk-right'] = {
                 frames = {5, 6, 7, 8},
                 interval = 0.15,
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['walk-down'] = {
                 frames = {1, 2, 3, 4},
                 interval = 0.15,
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['walk-up'] = {
                 frames = {9, 10, 11, 12},
                 interval = 0.15,
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['idle-left'] = {
                 frames = {13},
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['idle-right'] = {
                 frames = {5},
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['idle-down'] = {
                 frames = {1},
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
             ['idle-up'] = {
                 frames = {9},
-                texture = 'character-walk'
+                texture = 'jefewalk'
             },
         }
     }
