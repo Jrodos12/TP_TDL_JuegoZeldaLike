@@ -2,10 +2,10 @@
 Videojuego como proyecto aplicativo de los conceptos y contenidos de la materia TDL. Se utiliza de base: [Intro to Game Development from Harvard University](https://docs.cs50.net/ocw/games/assignments/5/assignment5.html)
 
 ## Contiene dos versiones ejecutables:
-- Una con el jefe en segunda sala (CarpetaJefeRoom2) 
-- Versión original (carpeta JuegoCompleto).
+- Una con el jefe en segunda sala (CarpetaJefeRoom2.zip) 
+- Versión original (JuegoCompleto.zip).
 
- Estos ejecutables son para windows, para ver en linux se sugiere instalar [Love](https://love2d.org/) y [Lua](https://www.lua.org/) y correr el main. Para ejecturar en Windows se necesita únicamente descargar alguna de las carpetas indicadas anteriormente y clickear el .exe
+ Estos ejecutables son para windows, para ver en linux se sugiere instalar [Love](https://love2d.org/) y [Lua](https://www.lua.org/) y correr el main. Para ejecturar en Windows se necesita únicamente tener alguno de los dos .zip indicados descargados, extraer la carpeta y clickear "JuegoCompleto.exe"/"CarpetaJefeRoom2".
 
 
 ## Modificaciones hechas:
